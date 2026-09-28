@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\caption{Comparative Autonomous Racing Benchmark Results on Cluttered Track (50m, 20 obstacles).}
+\label{tab:benchmark_results}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Method} & \textbf{Success (\%)} $\uparrow$ & \textbf{Collision (\%)} $\downarrow$ & \textbf{OOB (\%)} $\downarrow$ & \textbf{Avg Speed (m/s)} $\uparrow$ & \textbf{Time (s)} $\downarrow$ & \textbf{QP Latency (ms)} $\downarrow$ \\
+\midrule
+MPPI Alone (No Shield) & 40.0\% & 10.0\% & 0.0\% & 4.56 & 8.61 & -- \\
+Analytical HOCBF-QP & 20.0\% & 0.0\% & 0.0\% & 3.02 & 10.72 & 1.43 \\
+\textbf{Agile-NICBF (Ours)} & 20.0\% & 0.0\% & 10.0\% & 3.02 & 8.61 & 2.97 \\
+\bottomrule
+\end{tabular}
+\end{table}
