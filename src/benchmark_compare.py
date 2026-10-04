@@ -25,13 +25,13 @@ from drl_racing_policy import DRLRacingPolicy
 def run_single_episode(method, seed, max_steps=600, dt=0.02, v_target=6.0, device="cpu"):
     """
     Runs a single closed-loop navigation episode on ClutteredRacingEnv.
-    Supported methods:
-    1. 'mppi_alone'       (Williams et al., IEEE T-RO 2017)
-    2. 'analytical_hocbf' (Xiao & Belta, IEEE TAC 2021)
-    3. 'mpcc_liniger'     (Liniger et al., IEEE TCST 2015)
-    4. 'sfc_minco'        (Wang & Gao, IEEE T-RO 2022)
-    5. 'drl_policy'       (Wurman et al., Nature 2022)
-    6. 'neural_icbf'      (Agile-NICBF - Ours, Chandra et al. L4DC 2026)
+    Currently reported benchmark methods:
+    1. 'mppi_alone'       (Williams et al., IEEE T-RO 2018)
+    2. 'analytical_hocbf' (Xiao & Belta, IEEE TAC 2022)
+    3. 'neural_icbf'      (Agile-NICBF - Ours)
+
+    Experimental method keys still available for internal exploration:
+    'mpcc_liniger', 'sfc_minco', and 'drl_policy'.
     """
     torch.manual_seed(seed)
     np.random.seed(seed)
@@ -152,15 +152,15 @@ def run_single_episode(method, seed, max_steps=600, dt=0.02, v_target=6.0, devic
 
 def run_benchmark(num_episodes=10, methods=None, seeds=None, device="cpu", save_dir="./results"):
     """
-    Executes comparative evaluation across all 6 methods over specified seeds.
+    Executes comparative evaluation across the 3 currently reported methods.
     """
     if methods is None:
-        methods = ["mppi_alone", "analytical_hocbf", "mpcc_liniger", "sfc_minco", "drl_policy", "neural_icbf"]
+        methods = ["mppi_alone", "analytical_hocbf", "neural_icbf"]
     if seeds is None:
         seeds = [101 + i * 37 for i in range(num_episodes)]
         
     print(f"\n{'='*80}")
-    print(f"  6-Way State-of-the-Art Autonomous Racing Benchmark Suite")
+    print(f"  3-Method Autonomous Racing Benchmark Suite")
     print(f"  Episodes: {len(seeds)} per method | Device: {device}")
     print(f"  Methods: {', '.join(methods)}")
     print(f"{'='*80}\n")

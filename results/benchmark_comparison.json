@@ -7,7 +7,7 @@
       "oob_rate_pct": 0.0,
       "avg_speed_mps": 4.562979539047272,
       "avg_completion_time_s": 8.605,
-      "avg_qp_latency_ms": NaN
+      "avg_qp_latency_ms": 0.0
     },
     "analytical_hocbf": {
       "num_episodes": 10,

@@ -6,8 +6,8 @@ import torch.nn as nn
 
 class DynamicBicycleParams:
     """
-    Official default vehicle parameters from F1TENTH Gym (O'Kelly et al., PMLR 2020).
-    Directly matched with f1tenth_gym/gym/f110_gym/envs/dynamic_models.py.
+    Default vehicle parameters from F1TENTH Gym / CommonRoad-style single-track dynamics.
+    Source: F1TENTH Gym documentation, "Changing Parameters in Vehicle Dynamics".
     """
     def __init__(self,
                  mass=3.74,         # kg (total vehicle mass)
@@ -51,7 +51,7 @@ class DynamicBicycleParams:
 
 class DynamicBicycleModel:
     """
-    6D Single-Track Dynamic Bicycle Model matching F1TENTH Gym's vehicle_dynamics_st.
+    6D single-track dynamic bicycle model using F1TENTH parameter values.
     State x: [px, py, psi, vx, vy, r]
     Control u: [ax, delta]
     """
@@ -104,7 +104,7 @@ class DynamicBicycleModel:
     def continuous_dynamics_torch(self, state, control):
         """
         Batched continuous time ODE for GPU MPPI and Neural Barrier Training.
-        Matches exact Kamm's friction circle saturation and F1TENTH stiffness laws.
+        Matches the NumPy twin and applies smooth lateral tire-force saturation.
         state: [B, 6] -> (px, py, psi, vx, vy, r)
         control: [B, 2] -> (ax, delta)
         returns: [B, 6]

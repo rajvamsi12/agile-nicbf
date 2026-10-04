@@ -5,26 +5,23 @@
 [![CUDA 13.2](https://img.shields.io/badge/CUDA-13.2-green.svg)](https://developer.nvidia.com/cuda-toolkit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Official repository for **Agile-NICBF**: A microsecond Neural Integral Control Barrier Function (NICBF) safety shield integrated with GPU-accelerated Model Predictive Path Integral (MPPI) control for high-speed ($>6.0\,\mathrm{m/s}$, $22\,\mathrm{km/h}$) autonomous racing collision avoidance under dynamic tire slip and friction limits.
+Official repository for **Agile-NICBF**: a Neural Integral Control Barrier Function (NICBF) safety shield integrated with Model Predictive Path Integral (MPPI) control for high-speed autonomous racing collision avoidance under dynamic tire slip and actuator limits.
 
 This repository contains the full project evolution:
 1. **Phase 1 (`prototype_neural_ode/`):** The foundational Neural ODE and Imitation Learning research prototype for kinematic obstacle avoidance.
-2. **Phase 2 (`src/` & `models/`):** The complete 6D Dynamic Bicycle Agile-NICBF framework with Pacejka tire dynamics, GPU MPPI planning, certified microsecond QP shield, and 6-way SOTA comparative benchmark suite.
+2. **Phase 2 (`src/` & `models/`):** The 6D dynamic bicycle Agile-NICBF framework with F1TENTH/CommonRoad-style single-track dynamics, MPPI planning, QP safety filtering, and a 3-method comparative benchmark suite.
 
 ---
 
 ## Key Features
 
-- **6D Dynamic Single-Track Vehicle Dynamics:** Exact Pacejka $\tanh$ tire cornering stiffness model with load-transfer-balanced Kamm's friction circle limits ($F_{x}^2 + F_{y}^2 \le (\mu F_z)^2$).
-- **Microsecond Active-Set QP Safety Shield:** Real-time online quadratic programming filter executing in $<3.0\,\mathrm{ms}$ with exact autograd Lie derivatives and emergency braking fail-safes.
-- **GPU-Accelerated Reachability Training:** Neural Barrier Network trained on 250,000 GPU forward rollouts on NVIDIA T1000 across 49 time-varying action profiles (Val Loss: 0.0068, Accuracy: 97.18%).
-- **Exhaustive 6-Way SOTA Benchmark Suite:** Evaluated against published baselines:
-  1. *MPPI Alone* (Williams et al., IEEE T-RO 2017)
-  2. *Analytical HOCBF-QP* (Xiao & Belta, IEEE TAC 2021)
-  3. *Nonlinear MPCC* (Liniger et al., IEEE TCST 2015)
-  4. *Safe Flight Corridors / MINCO Splines* (Wang & Gao, IEEE T-RO 2022)
-  5. *Deep RL Racing Policy* (Wurman et al., Nature 2022)
-  6. *Agile-NICBF (Ours)*
+- **6D Dynamic Single-Track Vehicle Dynamics:** F1TENTH/CommonRoad-style single-track vehicle parameters with smooth lateral tire-force saturation in the simulator.
+- **QP Safety Shield:** Online quadratic programming filter with autograd Lie derivatives, HOCBF-style wall/obstacle constraints, actuator bounds, and emergency braking fail-safes.
+- **Reachability Training:** Neural Barrier Network training code defaults to 250,000 forward-rollout samples across 49 time-varying action profiles.
+- **Current 3-Method Benchmark Suite:** Evaluated against the three methods currently present in `results/benchmark_comparison.json`:
+  1. *MPPI Alone* (Williams et al., IEEE T-RO 2018)
+  2. *Analytical HOCBF-QP* (Xiao & Belta, IEEE TAC 2022)
+  3. *Agile-NICBF (Ours)*
 
 ---
 
@@ -36,11 +33,11 @@ This repository contains the full project evolution:
 │   ├── dynamic_bicycle_env.py         # 6D F1TENTH vehicle physics & 50m cluttered racing track
 │   ├── safe_controller.py             # Microsecond Agile-NICBF Active-Set QP safety shield
 │   ├── mppi_planner.py                # GPU-accelerated MPPI parallel trajectory planner
-│   ├── mpcc_controller.py             # Liniger MPCC contouring control baseline
-│   ├── sfc_planner.py                 # Safe Flight Corridor / MINCO spline baseline
-│   ├── drl_racing_policy.py           # Deep RL racing policy baseline
+│   ├── mpcc_controller.py             # Experimental MPCC-inspired controller (not in current benchmark table)
+│   ├── sfc_planner.py                 # Experimental SFC/MINCO-inspired planner (not in current benchmark table)
+│   ├── drl_racing_policy.py           # Experimental DRL-inspired policy stub (not in current benchmark table)
 │   ├── train_neural_icbf.py           # 250k GPU dataset generation & neural barrier training
-│   ├── benchmark_compare.py           # Master 6-way comparative benchmark suite
+│   ├── benchmark_compare.py           # Current 3-method comparative benchmark suite
 │   ├── render_video.py                # High-resolution MP4 video animation renderer
 │   ├── plot_trajectories.py           # 2D racing line & telemetry plotting
 │   └── generate_latex_table.py        # L4DC publication LaTeX table generator
@@ -93,11 +90,11 @@ pip install torch numpy scipy qpsolvers quadprog osqp matplotlib
 python src/safe_controller.py
 ```
 
-### Running the 6-Way SOTA Benchmark Suite
+### Running the Current 3-Method Benchmark Suite
 
 ```bash
-# Run 10-episode benchmark across all 6 baselines on GPU
-python src/benchmark_compare.py --episodes 10 --device cuda
+# Run 10-episode benchmark across the 3 currently reported methods
+python3 src/benchmark_compare.py --episodes 10 --device cuda
 ```
 
 ### Rendering the Full 50m Racing Video

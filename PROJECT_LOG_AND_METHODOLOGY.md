@@ -21,11 +21,11 @@
 
 | Local File Path | Remote File Path | Component Purpose | Mathematical & Algorithmic Provenance / Inspiration |
 | :--- | :--- | :--- | :--- |
-| `src/dynamic_bicycle_env.py` | `/home/raj/agile_nicbf/src/dynamic_bicycle_env.py` | 6D Single-Track Dynamic Bicycle Model, Pacejka Tire Friction, Kamm Circle Bounds, and Cluttered Racing Environment. | **Dynamics Equations:** Derived from Rajesh Rajamani, *Vehicle Dynamics and Control*, Springer (Ch. 2: Lateral Vehicle Dynamics).<br>**Tire Model:** Hans B. Pacejka, *Tire and Vehicle Dynamics*, Elsevier.<br>**Vehicle Parameters:** Official default values from F1TENTH Gym (`f1tenth_gym/docs/customized_usage.rst`), as described in O'Kelly et al., *NeurIPS 2019 / PMLR 2020*. |
+| `src/dynamic_bicycle_env.py` | `/home/raj/agile_nicbf/src/dynamic_bicycle_env.py` | 6D Single-Track Dynamic Bicycle Model, smooth lateral tire-force saturation, and Cluttered Racing Environment. | **Dynamics Equations:** Dynamic single-track/bicycle model consistent with the F1TENTH Gym / CommonRoad single-track model family.<br>**Vehicle Parameters:** Default values from F1TENTH Gym vehicle-dynamics documentation (`mu`, `C_Sf`, `C_Sr`, `lf`, `lr`, `h`, `m`, `I`, steering and acceleration limits).<br>**Current Code Note:** The present implementation uses linear cornering stiffness with smooth `tanh` force saturation; it is not an exact Pacejka Magic Formula implementation. |
 | `src/train_neural_icbf.py` | `/home/raj/agile_nicbf/src/train_neural_icbf.py` | GPU-Accelerated 120,000-sample Forward-Invariant Rollout Labeler & 4-Layer Barrier Network Training Script. | **Labeling Logic:** Multi-heading evasive rollout methodology adapted from `forward_invariant_labels.py` in ACC Neural ICBF paper.<br>**Loss Function:** Supervised boundary barrier classification loss $\mathcal{L}_h(\Theta_h)$ from Section IV-C of Chandra et al. (ACC 2025). |
 | *Trained Checkpoint* | `/home/raj/agile_nicbf/models/neural_icbf_6d.pth` | PyTorch Weights of the learned 6D Dynamic Barrier Function $h_\theta(\mathbf{x})$. | 4-layer MLP (256-256-128 units with Tanh activation) predicting continuous safety invariant sets $\mathcal{C} = \{\mathbf{x} : h_\theta(\mathbf{x}) \ge 0\}$. |
 | `src/mppi_planner.py` | `/home/raj/agile_nicbf/src/mppi_planner.py` | GPU-Accelerated 3,000-sample Model Predictive Path Integral (MPPI) Nominal Swerve Planner. | **Formulation:** Information Theoretic MPC / Stochastic Control from Williams et al., *IEEE Transactions on Robotics / ICRA 2016*. |
-| `src/safe_controller.py` | `/home/raj/agile_nicbf/src/safe_controller.py` | Microsecond Multi-Constraint Neural ICBF Quadratic Program (QP) Safety Shield. | **Formulation:** Integral Control Barrier Functions from Ames et al. (IEEE TAC 2020) and Chandra et al. (ACC 2025).<br>**Track Boundaries:** Relative-Degree-2 Higher-Order Control Barrier Functions (HOCBF) for nonlinear single-track dynamics. |
+| `src/safe_controller.py` | `/home/raj/agile_nicbf/src/safe_controller.py` | Multi-Constraint Neural ICBF Quadratic Program (QP) Safety Shield. | **Formulation:** Integral Control Barrier Functions from Ames et al. (2020) and the Neural Differentiable ICBF formulation of Zinage, Chandra, and Bakolas (arXiv:2312.07345).<br>**Track Boundaries:** Relative-Degree-2 Higher-Order Control Barrier Functions (HOCBF) following Xiao and Belta (IEEE TAC 2022). |
 | `PROJECT_LOG_AND_METHODOLOGY.md` | `/home/raj/agile_nicbf/PROJECT_LOG_AND_METHODOLOGY.md` | Single Source of Truth log for all technical steps, equations, and code modifications. | Created to ensure complete reproducibility and synchronization between local and remote environments. |
 
 ---
@@ -48,10 +48,12 @@
   $$\dot{v}_x = a_x + v_y r - \frac{F_{yf} \sin\delta}{m}$$
   $$\dot{v}_y = -v_x r + \frac{F_{yf} \cos\delta + F_{yr}}{m}$$
   $$\dot{r} = \frac{l_f F_{yf} \cos\delta - l_r F_{yr}}{I_z}$$
-* **Tire Slip & Lateral Force Formulation:**
+* **Tire Slip & Lateral Force Formulation in Current Code:**
   $$\alpha_f = -\arctan\left(\frac{v_y + l_f r}{v_x}\right) + \delta, \quad \alpha_r = -\arctan\left(\frac{v_y - l_r r}{v_x}\right)$$
-  $$F_{yf} = \mu F_{zf} \sin(C \arctan(B \alpha_f)), \quad F_{yr} = \mu F_{zr} \sin(C \arctan(B \alpha_r))$$
-  Saturated via Kamm's friction circle: $a_x^2 + a_y^2 \le (\mu g)^2$.
+  $$F_{yf,\mathrm{lin}} = \mu F_{zf} C_{Sf}\alpha_f, \quad F_{yr,\mathrm{lin}} = \mu F_{zr} C_{Sr}\alpha_r$$
+  $$F_{yf} = F_{yf,\max}\tanh\left(\frac{F_{yf,\mathrm{lin}}}{F_{yf,\max}}\right), \quad
+  F_{yr} = F_{yr,\max}\tanh\left(\frac{F_{yr,\mathrm{lin}}}{F_{yr,\max}}\right)$$
+  with $F_{yf,\max}$ and $F_{yr,\max}$ reduced by the remaining friction budget under longitudinal acceleration. This is a smooth simulator saturation; it should not be cited as an exact Pacejka Magic Formula.
 * **Official Parameters Used:**
   * Total Mass $m = 3.74\text{ kg}$
   * Yaw Inertia $I_z = 0.04712\text{ kg}\cdot\text{m}^2$
@@ -201,9 +203,9 @@
 
 ---
 
-## 4. Stage 5: Comparative Autonomous Racing Benchmark Suite
+## 4. Stage 5: Current Three-Method Autonomous Racing Benchmark Suite
 
-Conducted extensive multi-seed comparative evaluations across 3 comparative baselines on the benchmark cluttered racing arena ($50\text{ m}$ track, 20 randomized obstacles, $4.0\text{ m}$ track width, target racing speed $6.0\text{ m/s}$):
+Conducted multi-seed comparative evaluations across the three methods currently reported in `results/benchmark_comparison.json` on the benchmark cluttered racing arena ($50\text{ m}$ track, 20 randomized obstacles, $4.0\text{ m}$ track width, target racing speed $6.0\text{ m/s}$):
 
 ### Quantitative Results Summary:
 | Baseline Method | Success Rate ($\uparrow$) | Collision Rate ($\downarrow$) | Out-of-Bounds ($\downarrow$) | Avg Speed (m/s) | Completion Time (s) | QP Latency (ms) |
@@ -215,7 +217,7 @@ Conducted extensive multi-seed comparative evaluations across 3 comparative base
 ### Theoretical & Practical Findings:
 1. **MPPI Alone (Baseline 1):** Highly agile on open tracks, but prone to sampling blind spots in dense obstacle clusters ($10\%$ collision rate on high-speed crash trajectories).
 2. **Analytical HOCBF-QP (Baseline 2):** Safe ($0\%$ collisions) but suffers from severe theoretical over-conservatism; excessive intervention rates ($>450\text{ interventions/episode}$) cause over-braking and crawling speeds ($1.2\text{--}3.3\text{ m/s}$), leading to timeouts on $80\%$ of seeds.
-3. **Agile-NICBF (Our Method):** Achieves **0.0% collision rate** while enabling agile racing maneuvers at $6.0\text{ m/s}$ ($8.61\text{ s}$ finish times) with minimal interventions ($60\text{--}125$ interventions vs $450\text{+}$ for analytical HOCBF). Sub-3ms QP evaluation time ($2.97\text{ ms}$) satisfies real-time $50\text{ Hz}$ closed-loop execution.
+3. **Agile-NICBF (Our Method):** In the saved result artifact, achieves **0.0% collision rate** but only **20.0% success rate** and **10.0% out-of-bounds rate**. The saved table therefore supports a cautious claim of reduced collision rate relative to MPPI alone, not a broad SOTA-winning claim. Mean saved QP latency is $2.97\text{ ms}$.
 
 ---
 
@@ -226,4 +228,3 @@ Generated high-resolution publication figures and LaTeX tables in `results/`:
 2. **`results/friction_circle_compliance.png`:** Dynamic acceleration load distribution ($a_x$ vs $a_y$) demonstrating strict compliance within Kamm's friction circle envelope ($\mu g = 10.29\text{ m/s}^2$) under Agile-NICBF safety filtering.
 3. **`results/benchmark_table.tex`:** Publication-ready LaTeX comparative table formatted for IEEE/L4DC submission standards.
 4. **`results/benchmark_comparison.json`:** Full machine-readable raw telemetry and per-episode metrics across all seeds and baselines.
-

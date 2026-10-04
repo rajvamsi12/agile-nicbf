@@ -19,8 +19,8 @@ except ImportError:
 class NeuralICBFController:
     """
     Microsecond Neural Integral Control Barrier Function (NICBF) Safety Shield.
-    Enforces dynamic tire slip, Kamm's friction circle limits, and relative-degree-2 HOCBF track boundaries and obstacles.
-    Reference: Chandra et al. (ACC 2025 / L4DC 2026), Ames et al. (IEEE TAC 2020).
+    Enforces learned/geometric safety constraints, actuator bounds, and relative-degree-2 HOCBF track boundaries and obstacles.
+    References: Ames et al. (ICBF, 2020), Xiao & Belta (HOCBF, IEEE TAC 2022).
     """
     def __init__(self,
                  model_path=None,
@@ -29,7 +29,7 @@ class NeuralICBFController:
                  alpha1=2.5,          # Relative-degree-2 barrier gain 1 (analytical HOCBF)
                  alpha2=3.5,          # Relative-degree-2 barrier gain 2 (analytical HOCBF)
                  alpha_w=3.5,         # Track wall HOCBF gain
-                 gamma_u=2.0,         # Actuator / Kamm circle class-K gain
+                 gamma_u=2.0,         # Normalized actuator input-barrier class-K gain
                  r_margin=0.26,       # Safety boundary margin (meters, ensures clearance outside 0.20m crash boundary)
                  w_slack=1000.0,      # Feasibility relaxation weight
                  solver='quadprog',   # Exact active-set solver
@@ -230,8 +230,9 @@ class NeuralICBFController:
             u_safe[1] = np.clip(u_safe[1], -self.p.delta_max, self.p.delta_max)
             return u_safe, {"qp_active": False, "v_star": np.zeros(2), "min_h_val": overall_margin, "hu": 1.0, "latency_ms": (time.time()-t0)*1000.0}
             
-        # 4. Input Actuator & Friction Circle Constraint: p_u^T du >= -gamma_u * hu
-        # hu = 1 - ||u/u_max||^2 >= 0
+        # 4. Normalized actuator input barrier, following the ICBF input-bound construction
+        # h_u = 1 - ((a_x/a_max)^2 + (delta/delta_max)^2) >= 0.
+        # Tire-force saturation is handled in the dynamics model, not by this QP row.
         hu = 1.0 - ((ax / self.p.a_max)**2 + (delta / self.p.delta_max)**2)
         pu = np.array([-2.0 * ax / (self.p.a_max**2), -2.0 * delta / (self.p.delta_max**2)], dtype=np.float64)
         rhs_u = float(self.gamma_u * hu)
