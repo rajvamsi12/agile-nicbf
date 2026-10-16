@@ -148,6 +148,26 @@ Known issues in the Phase 1 prototype:
 
 ---
 
+## Paper draft (L4DC 2027) vs. this repository
+
+| Paper item | In this repo? | Where / note |
+|---|---|---|
+| Vehicle F_θ, Neural ODE (Sec. 4.1, Fig. 2) | Code yes, figure no | `prototype_neural_ode/system_neural_ode.py`, `learn_all.py`. No script produces Fig. 2 |
+| Imitation π_θ from NMPC via do-mpc (Sec. 4.2) | Code yes | `prototype_neural_ode/imitation_learner.py`. `do_mpc` is not in `requirements.txt` |
+| Forward-invariant labels, N_θ = 8, T = 20 (Sec. 5.2) | Yes | `prototype_neural_ode/forward_invariant_labels.py`, `learn_all.py` |
+| h_θ and ICBF QP (Sec. 4.3–4.4, Algorithm 1) | Yes | `prototype_neural_ode/neural_cbf.py`, `safe_controller.py`, `main.py`. The filter uses the analytic kinematic f₁, not F_θ |
+| Fig. 3 (h and h_e projections) | No | No plotting script |
+| Fig. 4 (geometric vs. forward-invariant labels) | Partly | `learn_all.py` writes `outputs/h_theta_heatmap_forward_invariant.png`. The image itself is not in the repo |
+| Table 4 (geometric vs. forward-invariant violations) | Code yes, results no | `prototype_neural_ode/main_compare.py`. It needs `model/ICBF_model_learned.pth` and `..._v2_forward_invariant.pth`, which are missing, and its output CSV is not saved |
+| Table 2 (vehicle: NMPC / ORCA-MAPF / CADRL) | **No** | No ORCA-MAPF, CADRL or timing/cost benchmark code |
+| Table 3 (quadrotor-pendulum) | **No** | No quadrotor-pendulum code or models |
+| Table 5 (SABLAS, double integrator) | **No** | No SABLAS or double-integrator code |
+| Neural ICBF on the dynamic bicycle (not in the draft yet) | Yes | `prototype_neural_ode/dynamic/`. See the results above |
+
+Prototype checkpoints that are present: `prototype_neural_ode/models/{system_model*.pth, IL_model*.pth, ICBF_model.pth}`. Loss curves are in `losses_*.csv`.
+
+---
+
 ## Repository layout
 
 ```
