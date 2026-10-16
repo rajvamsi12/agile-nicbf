@@ -8,7 +8,37 @@ The code is in `prototype_neural_ode/dynamic/`. Earlier experiments at 6 m/s use
 
 ## Results: Neural ICBF at 3.5 and 4.0 m/s
 
-Setup: 30 seeded obstacle layouts, μ = 1.0, MPPI with K = 50 samples. Values are percentages. *Unsafe* means collision or out of bounds.
+### Main result: 200 held-out seeds
+
+Setup: 200 obstacle layouts never used for tuning or any earlier run (seeds 3801 and up), μ = 1.0, MPPI with K = 50 samples. Values are percentages with 95% Wilson intervals. *Unsafe* means collision or out of bounds. The p-values come from paired exact McNemar tests against MPPI alone on the same seeds.
+
+| v | Method | Success | Unsafe | Stall | Timeout | Unsafe vs. MPPI (p) |
+|---|---|---|---|---|---|---|
+| 3.5 | MPPI alone | 86.0 [80.5, 90.1] | 0.5 [0.1, 2.8] | 13.5 | 0 | – |
+| 3.5 | Analytical HOCBF-QP | 61.0 [54.1, 67.5] | 29.0 [23.2, 35.6] | 7.0 | 3.0 | worse, p < 0.0001 |
+| 3.5 | Neural ICBF, π_θ nominal (paper) | 81.0 [75.0, 85.8] | 1.5 [0.5, 4.3] | 17.5 | 0 | n.s. (p = 0.63) |
+| 3.5 | Neural ICBF, MPPI nominal | 83.0 [77.2, 87.6] | **0.0** [0.0, 1.9] | 17.0 | 0 | n.s. (p = 1.0) |
+| 4.0 | MPPI alone | 84.0 [78.3, 88.4] | 6.0 [3.5, 10.2] | 10.0 | 0 | – |
+| 4.0 | Analytical HOCBF-QP | 27.5 [21.8, 34.1] | 35.0 [28.7, 41.8] | 9.0 | 28.5 | worse, p < 0.0001 |
+| 4.0 | Neural ICBF, π_θ nominal (paper) | 77.5 [71.2, 82.7] | **0.5** [0.1, 2.8] | 22.0 | 0 | **better, p = 0.003** |
+| 4.0 | Neural ICBF, MPPI nominal | 84.5 [78.8, 88.9] | **0.0** [0.0, 1.9] | 15.5 | 0 | **better, p = 0.0005** |
+
+The filter takes 7–8 ms per step on one CPU core, measured in the uncontended 30-seed run. Sources: `results/nicbf_heldout200.jsonl`, `results/nicbf_heldout200_summary.json`. Launcher: `run_nicbf_heldout200.sh`. Summary script: `prototype_neural_ode/dynamic/summarize_heldout.py`.
+
+**Takeaways**
+- At 4.0 m/s, Neural ICBF removes almost all crashes. MPPI alone is unsafe in 12 of 200 episodes; Neural ICBF with MPPI as the nominal is unsafe in 0, with the same success rate (84.5% vs. 84.0%, p = 1.0).
+- At 3.5 m/s, MPPI alone is already nearly crash-free (1 of 200), so there is little left to remove. Neural ICBF matches it.
+- The analytical HOCBF-QP is far worse than both: 29–35% unsafe.
+- With π_θ (the paper's obstacle-unaware imitation policy) as the nominal, safety is the same, but success is 3–6 points lower. The extra failures are stalls in front of obstacles.
+
+**Caveats**
+- Success is not significantly better than MPPI alone. The gain is in safety.
+- Most remaining failures are stalls (deadlocks), not crashes.
+- **Speed range.** At 3.5–4 m/s MPPI stays mostly below the grip limit (above 90% of available grip on only about 4–5% of steps). The method targets this sub-limit regime.
+
+### Development run: 30 seeds
+
+This was the first evaluation. 16 of its 30 seeds were also used for tuning, so it is superseded by the held-out run above.
 
 | v | Method | Success [95% Wilson CI] | Unsafe | Stall | Timeout | Filter latency |
 |---|---|---|---|---|---|---|
@@ -22,17 +52,6 @@ Setup: 30 seeded obstacle layouts, μ = 1.0, MPPI with K = 50 samples. Values ar
 | 4.0 | Neural ICBF, MPPI nominal | 83.3 [66, 93] | 0.0 | 16.7 | 0 | 7.3 ms |
 
 Sources: `results/nicbf_eval_baselines.jsonl`, `results/nicbf_eval_pipeline.jsonl`, `results/nicbf_overnight_summary.json`, `results/nicbf_overnight_REPORT.md`.
-
-**Takeaways**
-- Both Neural ICBF variants are far safer than the analytical HOCBF-QP: 0–3.3% unsafe vs. 20–33%.
-- With MPPI as the nominal there were no unsafe episodes at either speed. Success matches MPPI alone at 3.5 m/s and is slightly lower at 4.0 m/s.
-- The QP runs in 7–8 ms per step on the CPU.
-
-**Caveats**
-- With n = 30 the confidence intervals overlap. Neural ICBF does not significantly beat MPPI alone.
-- The config was tuned on 16 of the 30 evaluation seeds (101–656). Seed 878, the one π_θ-nominal crash, is held out.
-- π_θ ignores obstacles, as in the paper, so most failures are stalls (deadlocks in front of an obstacle).
-- **Speed range.** At 3.5–4 m/s MPPI stays mostly below the grip limit (above 90% of available grip on only about 4–5% of steps). At higher speeds one-step barrier filters break down; see below.
 
 ---
 
@@ -139,7 +158,7 @@ S = success, U = unsafe, St = stall. Sources: `predictive_filter`, `psf_v*`. Con
 ├── dynamic_bicycle_env.py, safe_controller.py, mppi_planner.py   # identical copies are kept in src/
 ├── predictive_filter.py, fast_rollout.py, train_terminal_barrier.py   # 6 m/s predictive filter (earlier work)
 ├── stress_grid.py               # benchmark driver: all methods, sharding, Wilson CIs, --analyze
-├── run_*.sh                     # exact commands used for every reported run
+├── run_*.sh                     # exact commands used for every reported run (main: run_nicbf_heldout200.sh)
 ├── src/                         # env, analytical/neural QP shields, MPPI, training, plotting, video
 ├── models/                      # earlier checkpoints (6-D/9-D barrier nets, terminal barrier)
 ├── prototype_neural_ode/        # kinematic prototype + dynamic/ (Neural ICBF pipeline, main result)

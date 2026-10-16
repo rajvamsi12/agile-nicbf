@@ -1,0 +1,226 @@
+{
+  "v3.5_mppi_alone": {
+    "n": 200,
+    "success": 0.86,
+    "success_ci_pct": [
+      80.51011908581415,
+      90.13301739402053
+    ],
+    "unsafe": 0.005,
+    "unsafe_ci_pct": [
+      0.08831687058453735,
+      2.7773704696427934
+    ],
+    "collision": 0.0,
+    "out_of_bounds": 0.005,
+    "stalled": 0.135,
+    "timeout": 0.0,
+    "mean_speed": 3.547068864057952,
+    "mean_latency_ms": null
+  },
+  "v3.5_analytical_hocbf": {
+    "n": 200,
+    "success": 0.61,
+    "success_ci_pct": [
+      54.09374590206673,
+      67.49165691121608
+    ],
+    "unsafe": 0.29,
+    "unsafe_ci_pct": [
+      23.154025564693193,
+      35.63747815540324
+    ],
+    "collision": 0.29,
+    "out_of_bounds": 0.0,
+    "stalled": 0.07,
+    "timeout": 0.03,
+    "mean_speed": 3.547559882371158,
+    "mean_latency_ms": null,
+    "paired_unsafe_vs_mppi": {
+      "n_common": 200,
+      "mppi_only": 0,
+      "method_only": 57,
+      "mcnemar_p": 1.3877787807814457e-17
+    },
+    "paired_success_vs_mppi": {
+      "n_common": 200,
+      "mppi_only": 58,
+      "method_only": 8,
+      "mcnemar_p": 1.7951476752580547e-10
+    }
+  },
+  "v3.5_nicbf": {
+    "n": 200,
+    "success": 0.81,
+    "success_ci_pct": [
+      74.99876124094632,
+      85.83282850557798
+    ],
+    "unsafe": 0.015,
+    "unsafe_ci_pct": [
+      0.5114237753504752,
+      4.3165729115389295
+    ],
+    "collision": 0.015,
+    "out_of_bounds": 0.0,
+    "stalled": 0.175,
+    "timeout": 0.0,
+    "mean_speed": 3.419808018542037,
+    "mean_latency_ms": 19.894869373015197,
+    "paired_unsafe_vs_mppi": {
+      "n_common": 200,
+      "mppi_only": 1,
+      "method_only": 3,
+      "mcnemar_p": 0.625
+    },
+    "paired_success_vs_mppi": {
+      "n_common": 200,
+      "mppi_only": 31,
+      "method_only": 21,
+      "mcnemar_p": 0.21160856876151612
+    }
+  },
+  "v3.5_nicbf_mppi": {
+    "n": 200,
+    "success": 0.83,
+    "success_ci_pct": [
+      77.18411632128769,
+      87.57209211856075
+    ],
+    "unsafe": 0.0,
+    "unsafe_ci_pct": [
+      0.0,
+      1.8845326668962936
+    ],
+    "collision": 0.0,
+    "out_of_bounds": 0.0,
+    "stalled": 0.17,
+    "timeout": 0.0,
+    "mean_speed": 3.5479177984425156,
+    "mean_latency_ms": 18.31236945694801,
+    "paired_unsafe_vs_mppi": {
+      "n_common": 200,
+      "mppi_only": 1,
+      "method_only": 0,
+      "mcnemar_p": 1.0
+    },
+    "paired_success_vs_mppi": {
+      "n_common": 200,
+      "mppi_only": 15,
+      "method_only": 9,
+      "mcnemar_p": 0.30745625495910645
+    }
+  },
+  "v4.0_mppi_alone": {
+    "n": 200,
+    "success": 0.84,
+    "success_ci_pct": [
+      78.2859297881253,
+      88.4325879983852
+    ],
+    "unsafe": 0.06,
+    "unsafe_ci_pct": [
+      3.4652194106514544,
+      10.193169336217284
+    ],
+    "collision": 0.035,
+    "out_of_bounds": 0.025,
+    "stalled": 0.1,
+    "timeout": 0.0,
+    "mean_speed": 4.022880339977412,
+    "mean_latency_ms": null
+  },
+  "v4.0_analytical_hocbf": {
+    "n": 200,
+    "success": 0.275,
+    "success_ci_pct": [
+      21.779700288091796,
+      34.068339412011525
+    ],
+    "unsafe": 0.35,
+    "unsafe_ci_pct": [
+      28.728824080917402,
+      41.83653571915147
+    ],
+    "collision": 0.345,
+    "out_of_bounds": 0.005,
+    "stalled": 0.09,
+    "timeout": 0.285,
+    "mean_speed": 3.744546030133678,
+    "mean_latency_ms": null,
+    "paired_unsafe_vs_mppi": {
+      "n_common": 200,
+      "mppi_only": 5,
+      "method_only": 63,
+      "mcnemar_p": 7.651062942926057e-14
+    },
+    "paired_success_vs_mppi": {
+      "n_common": 200,
+      "mppi_only": 115,
+      "method_only": 2,
+      "mcnemar_p": 8.310387710030923e-32
+    }
+  },
+  "v4.0_nicbf": {
+    "n": 200,
+    "success": 0.775,
+    "success_ci_pct": [
+      71.22587671141069,
+      82.73763032179636
+    ],
+    "unsafe": 0.005,
+    "unsafe_ci_pct": [
+      0.08831687058453735,
+      2.7773704696427934
+    ],
+    "collision": 0.005,
+    "out_of_bounds": 0.0,
+    "stalled": 0.22,
+    "timeout": 0.0,
+    "mean_speed": 3.734539129049824,
+    "mean_latency_ms": 13.587287204668455,
+    "paired_unsafe_vs_mppi": {
+      "n_common": 200,
+      "mppi_only": 12,
+      "method_only": 1,
+      "mcnemar_p": 0.00341796875
+    },
+    "paired_success_vs_mppi": {
+      "n_common": 200,
+      "mppi_only": 36,
+      "method_only": 23,
+      "mcnemar_p": 0.11747735024505848
+    }
+  },
+  "v4.0_nicbf_mppi": {
+    "n": 200,
+    "success": 0.845,
+    "success_ci_pct": [
+      78.83930935816389,
+      88.86036310167765
+    ],
+    "unsafe": 0.0,
+    "unsafe_ci_pct": [
+      0.0,
+      1.8845326668962936
+    ],
+    "collision": 0.0,
+    "out_of_bounds": 0.0,
+    "stalled": 0.155,
+    "timeout": 0.0,
+    "mean_speed": 3.991553223797192,
+    "mean_latency_ms": 12.418141695546346,
+    "paired_unsafe_vs_mppi": {
+      "n_common": 200,
+      "mppi_only": 12,
+      "method_only": 0,
+      "mcnemar_p": 0.00048828125
+    },
+    "paired_success_vs_mppi": {
+      "n_common": 200,
+      "mppi_only": 14,
+      "method_only": 15,
+      "mcnemar_p": 1.0
+    }
+  }
+}

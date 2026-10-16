@@ -110,7 +110,8 @@ def run_episode(method, seed, mu, v_target, K, device, max_steps=2000, dt=0.02, 
         shield = PredictiveSafetyFilter(device=psf_kw.pop("device", "cpu"), **psf_kw)  # CPU: 17 ms vs 42 ms on GPU
     elif method not in ("mppi_alone", "mppi_oracle_mu"):
         mode = "neural_icbf" if method in ("neural_icbf", "agile_nicbf_coupled") else "analytical_hocbf"
-        shield = get_shield(mode, device, shield_kwargs or {})
+        qp_kw = {k: v for k, v in (shield_kwargs or {}).items() if k not in ("psf", "nicbf")}  # other methods' settings
+        shield = get_shield(mode, device, qp_kw)
 
     current_u = np.array([env.actual_ax, env.actual_delta], dtype=np.float32)
     speeds, interventions, brakes, stall_run = [], 0, 0, 0
@@ -420,6 +421,7 @@ def main():
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     ap.add_argument("--out", default="results/stress_grid.jsonl")
     ap.add_argument("--shard", default="0/1", help="i/n: run seed indices with idx %% n == i")
+    ap.add_argument("--seed-start", type=int, default=0, help="first seed index (seed = 101 + 37*idx); >0 for held-out seeds")
     ap.add_argument("--r_margin", type=float, default=0.38, help="shield safety boundary margin")
     ap.add_argument("--no-brake-clamp", action="store_true",
                     help="pass brake_clamp=False to the shield (requires the brake_clamp patch)")
@@ -441,7 +443,7 @@ def main():
     os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
     write_meta(args.out, args)
     shard_i, shard_n = (int(x) for x in args.shard.split("/"))
-    seeds = [101 + i * 37 for i in range(args.episodes)]
+    seeds = [101 + i * 37 for i in range(args.seed_start, args.seed_start + args.episodes)]
     seeds = [s for i, s in enumerate(seeds) if i % shard_n == shard_i]
     shield_kwargs = {"r_margin": args.r_margin}
     if args.no_brake_clamp:

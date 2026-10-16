@@ -92,3 +92,32 @@ v=4.0 nicbf_mppi vs mppi_alone (same seeds): {'stalled | mppi out_of_bounds': 1,
 
 wrote results/nicbf_overnight_summary.json
 report: results/nicbf_overnight_REPORT.md
+===== HELD-OUT 200-seed evaluation  Fri Oct 16 11:40:40 AM IST 2026  config {"alpha": 5, "gamma": 10, "a_rate_scale": 30, "h_offset": 0.2}
+held-out evaluation done Fri Oct 16 12:12:27 PM IST 2026
+===== HELD-OUT 200-seed SUMMARY Fri Oct 16 12:24:06 PM IST 2026
+   v method                            n            success             unsafe  stall   tmo  lat ms
+ 3.5 MPPI alone                      200   86.0 [80.5,90.1]    0.5 [ 0.1, 2.8]   13.5   0.0     0.0
+ 3.5 Analytical HOCBF-QP             200   61.0 [54.1,67.5]   29.0 [23.2,35.6]    7.0   3.0     0.0
+ 3.5 Neural ICBF, pi_theta nominal   200   81.0 [75.0,85.8]    1.5 [ 0.5, 4.3]   17.5   0.0    19.9
+ 3.5 Neural ICBF, MPPI nominal       200   83.0 [77.2,87.6]    0.0 [ 0.0, 1.9]   17.0   0.0    18.3
+
+ 4.0 MPPI alone                      200   84.0 [78.3,88.4]    6.0 [ 3.5,10.2]   10.0   0.0     0.0
+ 4.0 Analytical HOCBF-QP             200   27.5 [21.8,34.1]   35.0 [28.7,41.8]    9.0  28.5     0.0
+ 4.0 Neural ICBF, pi_theta nominal   200   77.5 [71.2,82.7]    0.5 [ 0.1, 2.8]   22.0   0.0    13.6
+ 4.0 Neural ICBF, MPPI nominal       200   84.5 [78.8,88.9]    0.0 [ 0.0, 1.9]   15.5   0.0    12.4
+
+Paired vs MPPI alone (same seeds; exact McNemar):
+  v3.5_analytical_hocbf        unsafe  : only MPPI   0 | only method  57 | p = 0.0000
+  v3.5_analytical_hocbf        success : only MPPI  58 | only method   8 | p = 0.0000
+  v3.5_nicbf                   unsafe  : only MPPI   1 | only method   3 | p = 0.6250
+  v3.5_nicbf                   success : only MPPI  31 | only method  21 | p = 0.2116
+  v3.5_nicbf_mppi              unsafe  : only MPPI   1 | only method   0 | p = 1.0000
+  v3.5_nicbf_mppi              success : only MPPI  15 | only method   9 | p = 0.3075
+  v4.0_analytical_hocbf        unsafe  : only MPPI   5 | only method  63 | p = 0.0000
+  v4.0_analytical_hocbf        success : only MPPI 115 | only method   2 | p = 0.0000
+  v4.0_nicbf                   unsafe  : only MPPI  12 | only method   1 | p = 0.0034
+  v4.0_nicbf                   success : only MPPI  36 | only method  23 | p = 0.1175
+  v4.0_nicbf_mppi              unsafe  : only MPPI  12 | only method   0 | p = 0.0005
+  v4.0_nicbf_mppi              success : only MPPI  14 | only method  15 | p = 1.0000
+
+wrote results/nicbf_heldout200_summary.json
