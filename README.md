@@ -52,6 +52,72 @@ Sources: `results/nicbf_eval_baselines.jsonl`, `results/nicbf_eval_pipeline.json
 
 ---
 
+## Full results
+
+All tables use 30 seeds and the same seeded layouts, reported as percentages. Unsafe means collision or out of bounds. The source file in `results/` is listed under each table. Older 3–5-seed smoke grids (`grid_*`, `smoke*`) are kept in `results/` but are too small to report.
+
+### A. Baseline shields at 6 and 8 m/s (Phases 2–3, K = 50)
+
+| μ | v | MPPI alone | MPPI + oracle μ | Analytical HOCBF-QP | Neural ICBF-QP (6-D net) | Agile-NICBF coupled |
+|---|---|---|---|---|---|---|
+| 1.0 | 6 | **53.3** / 33.3 / 13.3 | 56.7 / 33.4 / 10.0 | 0.0 / 23.3 / 66.7 | 3.3 / 26.6 / 66.7 | 3.3 / 26.7 / 63.3 |
+| 1.0 | 8 | **33.3** / 53.3 / 13.3 | 33.3 / 56.7 / 10.0 | 0.0 / 43.3 / 56.7 | – | 0.0 / 43.4 / 56.7 |
+| 0.7 | 6 | 0.0 / 90.0 / 10.0 | **10.0** / 46.7 / 43.3 | 0.0 / 23.3 / 76.7 | – | 0.0 / 33.4 / 63.3 |
+| 0.7 | 8 | 0.0 / 90.0 / 10.0 | **10.0** / 66.6 / 23.3 | 0.0 / 50.0 / 50.0 | – | 0.0 / 60.0 / 40.0 |
+
+Each cell is success / unsafe / stall; the remainder is timeout. Sources: `ablate_clamp_on`, `part_e_trigger_logging`. With brake clamping off (`ablate_clamp_off`) the shield rows are identical.
+
+### B. Effect of planner sample count K (μ = 1.0, v = 6)
+
+| Method | K | Success | Unsafe | Stall | Timeout |
+|---|---|---|---|---|---|
+| MPPI alone | 50 | 53.3 | 33.3 | 13.3 | 0 |
+| MPPI alone | 1000 | **93.3** | 3.3 | 3.3 | 0 |
+| Analytical HOCBF-QP | 50 | 0.0 | 23.3 | 66.7 | 10.0 |
+| Analytical HOCBF-QP | 200 | 6.7 | 43.3 | 30.0 | 20.0 |
+| Analytical HOCBF-QP | 1000 | 43.3 | 20.0 | 6.7 | 30.0 |
+| Neural ICBF-QP (6-D net) | 1000 | 13.3 | 50.0 | 6.7 | 30.0 |
+| Agile-NICBF coupled | 1000 | 10.0 | 43.3 | 10.0 | 36.7 |
+
+Sources: `ceiling_mppi_k1000`, `ablation_*_k*`.
+
+### C. HOCBF-QP shield ablations and patches (μ = 1.0, v = 6, K = 50)
+
+| Variant | Success | Unsafe | Stall | Timeout |
+|---|---|---|---|---|
+| Default analytical HOCBF-QP | 0.0 | 23.3 | 66.7 | 10.0 |
+| Wall rows removed | 23.3 | 66.7 | 10.0 | 0 |
+| Wall α = 50 | 20.0 | 70.0 | 10.0 | 0 |
+| Wall α = 80 | 16.7 | 76.7 | 6.7 | 0 |
+| Safety margin r = 0.21 / 0.26 / 0.30 m | 0.0 / 0.0 / 0.0 | 30.0 / 23.3 / 20.0 | 63.3 / 63.3 / 70.0 | 6.7 / 13.3 / 10.0 |
+| `--wall-steer-guard zero_steer` | 6.7 | 33.4 | 60.0 | 0 |
+| `--wall-steer-guard drop_row` | 40.0 | 60.0 | 0 | 0 |
+| Wall + obstacle steer guards (options 1+2) | **56.7** | 43.3 | 0 | 0 |
+| Same guards, Neural ICBF-QP | 36.7 | 60.0 | 3.3 | 0 |
+| Same guards, Agile-NICBF coupled | 46.7 | 43.3 | 10.0 | 0 |
+
+Removing or patching the wall rows trades stalls for crashes. None of the patches makes the one-step QP both safe and live. Sources: `ablation_hocbf_*`, `sweep_rmargin_*`, `wallguard_*`, `opt12_guard`.
+
+### D. Predictive filter versions (μ = 1.0, v = 6)
+
+| Version | Main change | K = 50: S / U / St | K = 1000: S / U / St |
+|---|---|---|---|
+| v1 | multi-step predictive filter, no backup | 53.3 / 23.4 / 23.3 | – |
+| v2 | + MPPI samples as candidates, robust progress selection | 80.0 / 6.7 / 13.3 | 80.0 / 10.0 / 6.7 |
+| v3 | + brake-to-stop backup | 66.7 / 16.7 / 16.7 | – |
+| v4 | + carry-over of the committed plan | 70.0 / **0.0** / 30.0 | 83.3 / **0.0** / 16.7 |
+| v6 | + heading limit 1.4 rad, yaw-damping backup | **96.7** / 3.3 / 0.0 | 90.0 / **0.0** / 10.0 |
+| v7 | short 15-step backup + neural terminal certificate | 86.7 / 3.3 / 10.0 | 83.3 / 6.6 / 10.0 |
+| v8 | neural screen, exact full-stop verify of top 8 | 86.7 / 6.7 / 6.7 | 86.7 / 3.3 / 10.0 |
+| v9 | + 0.1 m commitment margin, carried plan re-verified | 90.0 / 3.3 / 6.7 | **93.3 / 0.0** / 6.7 |
+| v10 | numpy backend, neural screen + exact verify | 76.7 / 10.0 / 13.3 | **93.3 / 0.0** / 6.7 |
+| v10x | exact screen, no network (15.6 ms/step) | 86.7 / 10.0 / 3.3 | 90.0 / **0.0** / 10.0 |
+| v10x, assumes μ = 0.95 | robustness margin on grip | 93.3 / 0.0 / 6.7 | 86.7 / 3.3 / 10.0 |
+
+S = success, U = unsafe, St = stall. Sources: `predictive_filter`, `psf_v*`. Configs are in `diag/cfg_v10*.json`. Differences of 1–3 episodes out of 30 are within noise.
+
+---
+
 ## Main findings
 
 1. **Why the HOCBF-QP shield fails at the grip limit.** Once the front tire saturates, the steering gradient of the one-step wall barrier changes sign (from about +20 to −5). The QP then steers *into* the wall and blocks MPPI's counter-steer, so the car spins and stalls. MPPI alone recovers on the same seeds. QP patches (`--wall-steer-guard`, `--obs-steer-guard`, `--slip-brake-limit`, all off by default) did not fix this. The traces are in `diag/trace_*.json` and the reports in `logs/efg_*_report.log`.
