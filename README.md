@@ -1,24 +1,14 @@
 # Agile-NICBF: Neural Integral Control Barrier Functions for Agile Racing
 
-Safety filters for a 6-D dynamic bicycle (F1TENTH parameters, tire-force saturation, steering slew and motor lag) racing through a cluttered 50 m × 4 m track. The nominal planner is GPU MPPI. This repository holds the full project history:
+The paper's Neural ICBF pipeline (learned dynamics F_θ, imitation policy π_θ, learned barriers h_θ, integral control law) adapted to a 6-D dynamic bicycle: F1TENTH parameters, tire-force saturation, steering slew and motor lag. The car races through a cluttered 50 m × 4 m track at **3.5–4.0 m/s**, and the nominal planner is GPU MPPI.
 
-| Phase | Where | What |
-|---|---|---|
-| 1 | `prototype_neural_ode/*.py` | Original kinematic Neural-ODE / imitation / Neural CBF prototype |
-| 2 | `src/`, root `*.py`, `models/` | Dynamic-bicycle environment, MPPI, analytical HOCBF and neural-barrier QP shields, benchmark suite |
-| 3 | `stress_grid.py`, `run_efg_*`, `diag/` | Stress-grid benchmark and failure diagnostics of the HOCBF-QP shield |
-| 4 | `predictive_filter.py`, `fast_rollout.py`, `train_terminal_barrier.py` | Predictive (gatekeeper) safety filter using MPPI samples and a brake-to-stop backup |
-| 5 | `prototype_neural_ode/dynamic/` | Paper's Neural ICBF pipeline (Algorithm 1) adapted to the dynamic bicycle |
-
-The development log is in `PROJECT_LOG_AND_METHODOLOGY.md`.
+The code is in `prototype_neural_ode/dynamic/`. Earlier experiments at 6 m/s use different methods. They are kept for the record in [Earlier experiments at 6 m/s](#earlier-experiments-at-6-ms-not-the-papers-method).
 
 ---
 
-## Headline results
+## Results: Neural ICBF at 3.5 and 4.0 m/s
 
-All results use the same seeded obstacle layouts (30 seeds, μ = 1.0), reported as percentages. *Unsafe* means collision or out of bounds. Every episode is in `results/*.jsonl`.
-
-### Neural ICBF pipeline (Phase 5), v_target 3.5 and 4.0 m/s, K = 50
+Setup: 30 seeded obstacle layouts, μ = 1.0, MPPI with K = 50 samples. Values are percentages. *Unsafe* means collision or out of bounds.
 
 | v | Method | Success [95% Wilson CI] | Unsafe | Stall | Timeout | Filter latency |
 |---|---|---|---|---|---|---|
@@ -33,30 +23,52 @@ All results use the same seeded obstacle layouts (30 seeds, μ = 1.0), reported 
 
 Sources: `results/nicbf_eval_baselines.jsonl`, `results/nicbf_eval_pipeline.jsonl`, `results/nicbf_overnight_summary.json`, `results/nicbf_overnight_REPORT.md`.
 
-### Predictive filter (Phase 4), v_target 6.0 m/s
+**Takeaways**
+- Both Neural ICBF variants are far safer than the analytical HOCBF-QP: 0–3.3% unsafe vs. 20–33%.
+- With MPPI as the nominal there were no unsafe episodes at either speed. Success matches MPPI alone at 3.5 m/s and is slightly lower at 4.0 m/s.
+- The QP runs in 7–8 ms per step on the CPU.
 
-| Method | K | Success | Unsafe | Stall |
-|---|---|---|---|---|
-| MPPI alone | 50 | 53.3 | 33.3 | 13.3 |
-| MPPI alone | 1000 | 93.3 | 3.3 | 3.3 |
-| Analytical HOCBF-QP | 50 | 0.0 | 23.3 | 66.7 (+10 timeout) |
-| Predictive filter v9 | 50 | 90.0 | 3.3 | 6.7 |
-| Predictive filter v9 | 1000 | 93.3 | 0.0 | 6.7 |
-| Predictive filter v10x (exact, numpy, 15.6 ms/step) | 1000 | 90.0 | 0.0 | 10.0 |
-
-### Caveats
-
-- With n = 30 the confidence intervals overlap. Both filters clearly beat the analytical HOCBF-QP, but neither significantly beats MPPI alone.
-- The Neural ICBF configuration was tuned on 16 of the 30 evaluation seeds (101–656). Seed 878, the one π_θ-nominal crash, is held out.
-- π_θ ignores obstacles, as in the paper, so most Neural ICBF failures are stalls (deadlocks in front of an obstacle).
+**Caveats**
+- With n = 30 the confidence intervals overlap. Neural ICBF does not significantly beat MPPI alone.
+- The config was tuned on 16 of the 30 evaluation seeds (101–656). Seed 878, the one π_θ-nominal crash, is held out.
+- π_θ ignores obstacles, as in the paper, so most failures are stalls (deadlocks in front of an obstacle).
+- **Speed range.** At 3.5–4 m/s MPPI stays mostly below the grip limit (above 90% of available grip on only about 4–5% of steps). At higher speeds one-step barrier filters break down; see below.
 
 ---
 
-## Full results
+## Neural ICBF pipeline (`prototype_neural_ode/dynamic/`)
 
-All tables use 30 seeds and the same seeded layouts, reported as percentages. Unsafe means collision or out of bounds. The source file in `results/` is listed under each table. Older 3–5-seed smoke grids (`grid_*`, `smoke*`) are kept in `results/` but are too small to report.
+| Stage | Script | Output (`dynamic/models/`) | Validation |
+|---|---|---|---|
+| 1. Learned dynamics F_θ (Neural ODE, RK4, multi-step loss) | `stage1_dynamics.py` | `F_theta.pth` | 1 s rollout position error: 8.5 cm median, 14 cm p95. ∂F/∂u: cosine 0.99998, 8.4% median relative error |
+| 2. Imitation policy π_θ (GPU MPPI expert, empty track, v_target as input) | `stage2_imitation.py collect --shard i/n`, then `train` | `pi_theta.pth`, `il_data_*.npz` | Mean absolute error: a_x 0.235 m/s², δ 0.062 rad |
+| 3. Learned barriers h_obs(dx, dy, ψ, v_x, v_y, r, r_obs) and h_wall | `stage3_barrier.py obs` and `stage3_barrier.py wall` | `h_obs.pth`, `h_wall.pth` | Accuracy 99.7% / 99.4%. No unsafe validation states scored as safe at the 0.2 margin |
+| 4. Neural ICBF QP (integral law u̇ = φ + v*, grip constraint ≤ 0.8 μg, actuator range and rate limits) | `nicbf_controller.py` | – | 6–10 ms/step on CPU |
+| 5. Evaluation | `../../run_nicbf_final_eval.sh`, `summarize_overnight.py` | `results/nicbf_*` | See the table above |
 
-### A. Baseline shields at 6 and 8 m/s (Phases 2–3, K = 50)
+- Barrier labels are viability labels: a state is labelled safe if at least one of 22 backup maneuvers, simulated through F_θ with the actuator model, keeps the car clear for 1.5 s. The bottom wall reuses h_wall by mirror symmetry.
+- The frozen config is in `nicbf_final_config.json`: `{"alpha": 5, "gamma": 10, "a_rate_scale": 30, "h_offset": 0.2}`.
+- The model directory can be overridden with the `NICBF_MODELS` environment variable.
+
+Known issues in the original kinematic prototype (`prototype_neural_ode/*.py`):
+- Its `safe_controller.py` uses an analytic kinematic `bicycle_f()` and never the learned F_θ.
+- Its h is position-only.
+- It loads `model/*_learned.pth`, which do not exist. A `model -> models` symlink was added; nothing was renamed.
+
+---
+
+## Earlier experiments at 6 m/s (not the paper's method)
+
+These came before the Neural ICBF pipeline. They show why the method is restricted to sub-limit speeds. They also cover a different filter, the predictive filter, which works at 6 m/s but is **not** an ICBF. They are kept as a research record.
+
+**Findings**
+1. **One-step barrier QPs fail at the grip limit.** Once the front tire saturates, the steering gradient of the wall barrier changes sign (from about +20 to −5). The QP then steers *into* the wall and blocks MPPI's counter-steer, so the car spins and stalls. MPPI alone recovers on the same seeds. QP patches (`--wall-steer-guard`, `--obs-steer-guard`, `--slip-brake-limit`, all off by default) only trade stalls for crashes. The traces are in `diag/trace_*.json` and the reports in `logs/efg_*_report.log`.
+2. **The original 6-D barrier network (`models/neural_icbf_6d.pth`) was used outside its training range.** It was trained on |r|, |v_y| ≤ 1, but MPPI exceeds that range on 64% of steps.
+3. **A predictive filter works at 6 m/s.** Code: `predictive_filter.py`, `fast_rollout.py`. It checks MPPI's samples against a brake-to-stop backup maneuver and commits only to verified plans. It reaches 90–93% success with 0 unsafe outcomes at K = 1000. A learned terminal certificate (`train_terminal_barrier.py`) added neither safety nor speed.
+
+All tables below use 30 seeds; values are percentages. Older 3–5-seed smoke grids (`grid_*`, `smoke*`) are kept in `results/` but are too small to report.
+
+### A. Baseline shields at 6 and 8 m/s (K = 50)
 
 | μ | v | MPPI alone | MPPI + oracle μ | Analytical HOCBF-QP | Neural ICBF-QP (6-D net) | Agile-NICBF coupled |
 |---|---|---|---|---|---|---|
@@ -118,71 +130,21 @@ S = success, U = unsafe, St = stall. Sources: `predictive_filter`, `psf_v*`. Con
 
 ---
 
-## Main findings
-
-1. **Why the HOCBF-QP shield fails at the grip limit.** Once the front tire saturates, the steering gradient of the one-step wall barrier changes sign (from about +20 to −5). The QP then steers *into* the wall and blocks MPPI's counter-steer, so the car spins and stalls. MPPI alone recovers on the same seeds. QP patches (`--wall-steer-guard`, `--obs-steer-guard`, `--slip-brake-limit`, all off by default) did not fix this. The traces are in `diag/trace_*.json` and the reports in `logs/efg_*_report.log`.
-2. **The original 6-D barrier network was used outside its training range.** It was trained on |r|, |v_y| ≤ 1, but MPPI exceeds that range on 64% of steps.
-3. **A predictive filter works at 6 m/s.** It checks MPPI's samples against a brake-to-stop backup maneuver and commits only to verified plans. It reaches 90–93% success with 0 unsafe outcomes at K = 1000. A learned terminal certificate added neither safety nor speed.
-4. **The paper's Neural ICBF works on the dynamic bicycle at sub-limit speeds (3.5–4 m/s).** It uses learned dynamics F_θ, viability-labelled learned barriers, and an integral control law with ∂F/∂u computed by autograd. It is far safer than the analytical HOCBF and about as good as MPPI alone. With MPPI as the nominal it had no unsafe episodes.
-
----
-
-## Neural ICBF pipeline (`prototype_neural_ode/dynamic/`)
-
-| Stage | Script | Output (`dynamic/models/`) | Validation |
-|---|---|---|---|
-| 1. Learned dynamics F_θ (Neural ODE, RK4, multi-step loss) | `stage1_dynamics.py` | `F_theta.pth` | 1 s rollout position error: 8.5 cm median, 14 cm p95. ∂F/∂u: cosine 0.99998, 8.4% median relative error |
-| 2. Imitation policy π_θ (GPU MPPI expert, empty track, v_target as input) | `stage2_imitation.py collect --shard i/n`, then `train` | `pi_theta.pth`, `il_data_*.npz` | Mean absolute error: a_x 0.235 m/s², δ 0.062 rad |
-| 3. Learned barriers h_obs(dx, dy, ψ, v_x, v_y, r, r_obs) and h_wall | `stage3_barrier.py obs` and `stage3_barrier.py wall` | `h_obs.pth`, `h_wall.pth` | Accuracy 99.7% / 99.4%. No unsafe validation states scored as safe at the 0.2 margin |
-| 4. Neural ICBF QP (integral law u̇ = φ + v*, grip constraint ≤ 0.8 μg, actuator range and rate limits) | `nicbf_controller.py` | – | 6–10 ms/step on CPU |
-| 5. Evaluation | `../../run_nicbf_final_eval.sh`, `summarize_overnight.py` | `results/nicbf_*` | See the table above |
-
-- Barrier labels are viability labels: a state is labelled safe if at least one of 22 backup maneuvers, simulated through F_θ with the actuator model, keeps the car clear for 1.5 s. The bottom wall reuses h_wall by mirror symmetry.
-- The frozen config is in `nicbf_final_config.json`: `{"alpha": 5, "gamma": 10, "a_rate_scale": 30, "h_offset": 0.2}`.
-- The model directory can be overridden with the `NICBF_MODELS` environment variable.
-
-Known issues in the Phase 1 prototype:
-- Its `safe_controller.py` uses an analytic kinematic `bicycle_f()` and never the learned F_θ.
-- Its h is position-only.
-- It loads `model/*_learned.pth`, which do not exist. A `model -> models` symlink was added; nothing was renamed.
-
----
-
-## Paper draft (L4DC 2027) vs. this repository
-
-| Paper item | In this repo? | Where / note |
-|---|---|---|
-| Vehicle F_θ, Neural ODE (Sec. 4.1, Fig. 2) | Code yes, figure no | `prototype_neural_ode/system_neural_ode.py`, `learn_all.py`. No script produces Fig. 2 |
-| Imitation π_θ from NMPC via do-mpc (Sec. 4.2) | Code yes | `prototype_neural_ode/imitation_learner.py`. `do_mpc` is not in `requirements.txt` |
-| Forward-invariant labels, N_θ = 8, T = 20 (Sec. 5.2) | Yes | `prototype_neural_ode/forward_invariant_labels.py`, `learn_all.py` |
-| h_θ and ICBF QP (Sec. 4.3–4.4, Algorithm 1) | Yes | `prototype_neural_ode/neural_cbf.py`, `safe_controller.py`, `main.py`. The filter uses the analytic kinematic f₁, not F_θ |
-| Fig. 3 (h and h_e projections) | No | No plotting script |
-| Fig. 4 (geometric vs. forward-invariant labels) | Partly | `learn_all.py` writes `outputs/h_theta_heatmap_forward_invariant.png`. The image itself is not in the repo |
-| Table 4 (geometric vs. forward-invariant violations) | Code yes, results no | `prototype_neural_ode/main_compare.py`. It needs `model/ICBF_model_learned.pth` and `..._v2_forward_invariant.pth`, which are missing, and its output CSV is not saved |
-| Table 2 (vehicle: NMPC / ORCA-MAPF / CADRL) | **No** | No ORCA-MAPF, CADRL or timing/cost benchmark code |
-| Table 3 (quadrotor-pendulum) | **No** | No quadrotor-pendulum code or models |
-| Table 5 (SABLAS, double integrator) | **No** | No SABLAS or double-integrator code |
-| Neural ICBF on the dynamic bicycle (not in the draft yet) | Yes | `prototype_neural_ode/dynamic/`. See the results above |
-
-Prototype checkpoints that are present: `prototype_neural_ode/models/{system_model*.pth, IL_model*.pth, ICBF_model.pth}`. Loss curves are in `losses_*.csv`.
-
----
-
 ## Repository layout
 
 ```
 .
 ├── dynamic_bicycle_env.py, safe_controller.py, mppi_planner.py   # identical copies are kept in src/
-├── predictive_filter.py, fast_rollout.py, train_terminal_barrier.py
+├── predictive_filter.py, fast_rollout.py, train_terminal_barrier.py   # 6 m/s predictive filter (earlier work)
 ├── stress_grid.py               # benchmark driver: all methods, sharding, Wilson CIs, --analyze
 ├── run_*.sh                     # exact commands used for every reported run
-├── src/                         # Phase 2 package (env, shields, MPPI, training, plotting, video)
-├── models/                      # Phase 2–4 checkpoints (6-D/9-D barrier nets, terminal barrier)
-├── prototype_neural_ode/        # Phase 1 prototype + dynamic/ (Phase 5 Neural ICBF pipeline)
+├── src/                         # env, analytical/neural QP shields, MPPI, training, plotting, video
+├── models/                      # earlier checkpoints (6-D/9-D barrier nets, terminal barrier)
+├── prototype_neural_ode/        # kinematic prototype + dynamic/ (Neural ICBF pipeline, main result)
 ├── diag/                        # diagnostics, episode traces, predictive-filter configs
 ├── tests/                       # ad-hoc tests and debugging scripts
 ├── results/                     # per-episode JSONL, summaries, figures, demo video
-└── logs/                        # console logs (logs/nicbf_overnight.log for Phase 5)
+└── logs/                        # console logs (logs/nicbf_overnight.log for the Neural ICBF run)
 ```
 
 **Sync rule:** `safe_controller.py`, `dynamic_bicycle_env.py` and `mppi_planner.py` must stay byte-identical between the repo root and `src/`.
@@ -208,7 +170,7 @@ python stress_grid.py --mu 1.0 --speeds 3.5 4.0 --Ks 50 --episodes 30 \
 python stress_grid.py --mu 1.0 --speeds 3.5 4.0 --Ks 50 --episodes 30 --methods nicbf nicbf_mppi \
     --nicbf "$(cat prototype_neural_ode/dynamic/nicbf_final_config.json)" --out results/my_nicbf.jsonl
 
-# Predictive filter
+# Predictive filter (earlier 6 m/s work)
 python stress_grid.py --mu 1.0 --speeds 6 --Ks 1000 --episodes 30 --methods predictive_filter \
     --psf "$(cat diag/cfg_v10x.json)" --out results/my_psf.jsonl
 
