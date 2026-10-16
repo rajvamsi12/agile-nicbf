@@ -1,0 +1,1 @@
+{"backup": true, "horizon": 20, "carry": true, "max_heading": 1.4, "backup_yaw_gain": 0.1, "a_brake": 4.5, "backup_steps": 60, "verify_steps": 60, "verify_k": 8, "verify_margin": 0.1, "backend": "numpy", "no_safe_fallback": "backup"}

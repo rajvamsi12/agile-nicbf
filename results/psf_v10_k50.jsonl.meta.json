@@ -1,0 +1,39 @@
+{
+  "args": {
+    "mu": [
+      1.0
+    ],
+    "speeds": [
+      6.0
+    ],
+    "Ks": [
+      50
+    ],
+    "episodes": 30,
+    "methods": [
+      "predictive_filter"
+    ],
+    "max_steps": 2000,
+    "device": "cuda",
+    "out": "results/psf_v10_k50.jsonl",
+    "shard": "0/4",
+    "r_margin": 0.38,
+    "no_brake_clamp": false,
+    "wall_steer_guard": "off",
+    "obs_steer_guard": false,
+    "slip_brake_limit": null,
+    "psf": "{\"backup\": true, \"horizon\": 20, \"carry\": true, \"max_heading\": 1.4, \"backup_yaw_gain\": 0.1, \"a_brake\": 4.5, \"backup_steps\": 15, \"terminal_net_path\": \"/home/raj/agile_nicbf/models/terminal_barrier_8d.pth\", \"terminal_thresh\": 0.2, \"verify_steps\": 60, \"verify_k\": 8, \"verify_margin\": 0.1, \"backend\": \"numpy\", \"no_safe_fallback\": \"backup\"}",
+    "analyze": null,
+    "ref": "mppi_alone"
+  },
+  "source_md5": {
+    "dynamic_bicycle_env.py": "48f78808a0b8cd97f721484327b5e488",
+    "mppi_planner.py": "bba9b74ecce746995f55da5d03f12163",
+    "safe_controller.py": "be34b1f4774deb860583073e78dbb8c2",
+    "train_neural_icbf.py": "2ffad07731d18c0ec4dabb61aa01c974",
+    "stress_grid.py": "aab51f55d85c36731c35075008fb949c"
+  },
+  "git_commit": "unknown",
+  "model_md5": "975184437bedd81643a817f0cd1bb3a0",
+  "time": "2026-10-16 01:13:30"
+}

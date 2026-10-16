@@ -1,0 +1,450 @@
+{
+  "v3.5_mppi_alone": {
+    "n": 30,
+    "success": 0.8666666666666667,
+    "success_ci_pct": [
+      70.31867316460598,
+      94.69034455288754
+    ],
+    "collision": 0.0,
+    "out_of_bounds": 0.0,
+    "unsafe": 0.0,
+    "unsafe_ci_pct": [
+      0.0,
+      11.351339476145206
+    ],
+    "stalled": 0.13333333333333333,
+    "timeout": 0.0,
+    "mean_speed": 3.5227662886733015,
+    "mean_latency_ms": null,
+    "failures": [
+      [
+        360,
+        "stalled"
+      ],
+      [
+        397,
+        "stalled"
+      ],
+      [
+        434,
+        "stalled"
+      ],
+      [
+        693,
+        "stalled"
+      ]
+    ]
+  },
+  "v3.5_analytical_hocbf": {
+    "n": 30,
+    "success": 0.6,
+    "success_ci_pct": [
+      42.32036012121571,
+      75.40937198355525
+    ],
+    "collision": 0.2,
+    "out_of_bounds": 0.0,
+    "unsafe": 0.2,
+    "unsafe_ci_pct": [
+      9.505107121882943,
+      37.30569656380418
+    ],
+    "stalled": 0.1,
+    "timeout": 0.1,
+    "mean_speed": 3.4829434113427555,
+    "mean_latency_ms": null,
+    "failures": [
+      [
+        138,
+        "collision"
+      ],
+      [
+        360,
+        "stalled"
+      ],
+      [
+        397,
+        "collision"
+      ],
+      [
+        434,
+        "stalled"
+      ],
+      [
+        508,
+        "collision"
+      ],
+      [
+        619,
+        "timeout"
+      ],
+      [
+        693,
+        "stalled"
+      ],
+      [
+        878,
+        "timeout"
+      ],
+      [
+        952,
+        "collision"
+      ],
+      [
+        989,
+        "collision"
+      ],
+      [
+        1100,
+        "timeout"
+      ],
+      [
+        1137,
+        "collision"
+      ]
+    ]
+  },
+  "v3.5_nicbf": {
+    "n": 30,
+    "success": 0.7333333333333333,
+    "success_ci_pct": [
+      55.552038158713245,
+      85.817336752419
+    ],
+    "collision": 0.03333333333333333,
+    "out_of_bounds": 0.0,
+    "unsafe": 0.03333333333333333,
+    "unsafe_ci_pct": [
+      0.5908590316197976,
+      16.670391146115726
+    ],
+    "stalled": 0.23333333333333334,
+    "timeout": 0.0,
+    "mean_speed": 3.4167334664218347,
+    "mean_latency_ms": 7.839989810668478,
+    "failures": [
+      [
+        101,
+        "stalled"
+      ],
+      [
+        397,
+        "stalled"
+      ],
+      [
+        619,
+        "stalled"
+      ],
+      [
+        656,
+        "stalled"
+      ],
+      [
+        878,
+        "collision"
+      ],
+      [
+        915,
+        "stalled"
+      ],
+      [
+        1063,
+        "stalled"
+      ],
+      [
+        1137,
+        "stalled"
+      ]
+    ]
+  },
+  "v3.5_nicbf_mppi": {
+    "n": 30,
+    "success": 0.8666666666666667,
+    "success_ci_pct": [
+      70.31867316460598,
+      94.69034455288754
+    ],
+    "collision": 0.0,
+    "out_of_bounds": 0.0,
+    "unsafe": 0.0,
+    "unsafe_ci_pct": [
+      0.0,
+      11.351339476145206
+    ],
+    "stalled": 0.13333333333333333,
+    "timeout": 0.0,
+    "mean_speed": 3.597161030227558,
+    "mean_latency_ms": 7.188974950792194,
+    "failures": [
+      [
+        138,
+        "stalled"
+      ],
+      [
+        360,
+        "stalled"
+      ],
+      [
+        397,
+        "stalled"
+      ],
+      [
+        693,
+        "stalled"
+      ]
+    ]
+  },
+  "v4.0_mppi_alone": {
+    "n": 30,
+    "success": 0.8666666666666667,
+    "success_ci_pct": [
+      70.31867316460598,
+      94.69034455288754
+    ],
+    "collision": 0.03333333333333333,
+    "out_of_bounds": 0.03333333333333333,
+    "unsafe": 0.06666666666666667,
+    "unsafe_ci_pct": [
+      1.8477023624516808,
+      21.323458516874165
+    ],
+    "stalled": 0.06666666666666667,
+    "timeout": 0.0,
+    "mean_speed": 4.057576017028917,
+    "mean_latency_ms": null,
+    "failures": [
+      [
+        138,
+        "collision"
+      ],
+      [
+        360,
+        "stalled"
+      ],
+      [
+        397,
+        "out_of_bounds"
+      ],
+      [
+        693,
+        "stalled"
+      ]
+    ]
+  },
+  "v4.0_analytical_hocbf": {
+    "n": 30,
+    "success": 0.3333333333333333,
+    "success_ci_pct": [
+      19.230497996726424,
+      51.21994849532198
+    ],
+    "collision": 0.3333333333333333,
+    "out_of_bounds": 0.0,
+    "unsafe": 0.3333333333333333,
+    "unsafe_ci_pct": [
+      19.230497996726424,
+      51.21994849532198
+    ],
+    "stalled": 0.26666666666666666,
+    "timeout": 0.06666666666666667,
+    "mean_speed": 3.5104041611141032,
+    "mean_latency_ms": null,
+    "failures": [
+      [
+        101,
+        "stalled"
+      ],
+      [
+        138,
+        "collision"
+      ],
+      [
+        175,
+        "collision"
+      ],
+      [
+        212,
+        "collision"
+      ],
+      [
+        360,
+        "stalled"
+      ],
+      [
+        397,
+        "stalled"
+      ],
+      [
+        434,
+        "stalled"
+      ],
+      [
+        619,
+        "collision"
+      ],
+      [
+        656,
+        "collision"
+      ],
+      [
+        693,
+        "stalled"
+      ],
+      [
+        730,
+        "timeout"
+      ],
+      [
+        767,
+        "timeout"
+      ],
+      [
+        841,
+        "stalled"
+      ],
+      [
+        915,
+        "collision"
+      ],
+      [
+        952,
+        "collision"
+      ],
+      [
+        989,
+        "stalled"
+      ],
+      [
+        1026,
+        "collision"
+      ],
+      [
+        1100,
+        "collision"
+      ],
+      [
+        1137,
+        "collision"
+      ],
+      [
+        1174,
+        "stalled"
+      ]
+    ]
+  },
+  "v4.0_nicbf": {
+    "n": 30,
+    "success": 0.8,
+    "success_ci_pct": [
+      62.69430343619583,
+      90.49489287811706
+    ],
+    "collision": 0.03333333333333333,
+    "out_of_bounds": 0.0,
+    "unsafe": 0.03333333333333333,
+    "unsafe_ci_pct": [
+      0.5908590316197976,
+      16.670391146115726
+    ],
+    "stalled": 0.16666666666666666,
+    "timeout": 0.0,
+    "mean_speed": 3.911804283985828,
+    "mean_latency_ms": 7.867274723274162,
+    "failures": [
+      [
+        101,
+        "stalled"
+      ],
+      [
+        619,
+        "stalled"
+      ],
+      [
+        656,
+        "stalled"
+      ],
+      [
+        878,
+        "collision"
+      ],
+      [
+        915,
+        "stalled"
+      ],
+      [
+        1137,
+        "stalled"
+      ]
+    ]
+  },
+  "v4.0_nicbf_mppi": {
+    "n": 30,
+    "success": 0.8333333333333334,
+    "success_ci_pct": [
+      66.43564934133498,
+      92.66345767456822
+    ],
+    "collision": 0.0,
+    "out_of_bounds": 0.0,
+    "unsafe": 0.0,
+    "unsafe_ci_pct": [
+      0.0,
+      11.351339476145206
+    ],
+    "stalled": 0.16666666666666666,
+    "timeout": 0.0,
+    "mean_speed": 3.9893369191336014,
+    "mean_latency_ms": 7.337072058939172,
+    "failures": [
+      [
+        360,
+        "stalled"
+      ],
+      [
+        397,
+        "stalled"
+      ],
+      [
+        508,
+        "stalled"
+      ],
+      [
+        619,
+        "stalled"
+      ],
+      [
+        693,
+        "stalled"
+      ]
+    ]
+  },
+  "v3.5_nicbf_paired_vs_mppi": {
+    "success|mppi:success": 19,
+    "stalled|mppi:success": 6,
+    "success|mppi:stalled": 3,
+    "stalled|mppi:stalled": 1,
+    "collision|mppi:success": 1
+  },
+  "v3.5_nicbf_mppi_paired_vs_mppi": {
+    "stalled|mppi:success": 1,
+    "success|mppi:success": 25,
+    "stalled|mppi:stalled": 3,
+    "success|mppi:stalled": 1
+  },
+  "v4.0_nicbf_paired_vs_mppi": {
+    "success|mppi:success": 20,
+    "success|mppi:collision": 1,
+    "stalled|mppi:success": 5,
+    "success|mppi:stalled": 2,
+    "success|mppi:out_of_bounds": 1,
+    "collision|mppi:success": 1
+  },
+  "v4.0_nicbf_mppi_paired_vs_mppi": {
+    "success|mppi:collision": 1,
+    "success|mppi:success": 24,
+    "stalled|mppi:stalled": 2,
+    "stalled|mppi:out_of_bounds": 1,
+    "stalled|mppi:success": 2
+  }
+}

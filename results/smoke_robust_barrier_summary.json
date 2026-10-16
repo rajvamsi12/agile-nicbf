@@ -1,0 +1,92 @@
+{
+  "(0.5, 10.0, 50)": {
+    "mppi_alone": {
+      "n": 3,
+      "success_pct": 0.0,
+      "success_ci": [
+        5.551115123125783e-15,
+        56.149703563931965
+      ],
+      "unsafe_pct": 100.0,
+      "unsafe_ci": [
+        43.85029643606804,
+        100.0
+      ],
+      "stalled_pct": 0.0,
+      "timeout_pct": 0.0,
+      "mean_speed": 7.718591832441915,
+      "median_finish_s": null,
+      "intervention_rate": 0.0,
+      "brake_override_rate": 0.0
+    },
+    "analytical_hocbf": {
+      "n": 3,
+      "success_pct": 0.0,
+      "success_ci": [
+        5.551115123125783e-15,
+        56.149703563931965
+      ],
+      "unsafe_pct": 100.0,
+      "unsafe_ci": [
+        43.85029643606804,
+        100.0
+      ],
+      "stalled_pct": 0.0,
+      "timeout_pct": 0.0,
+      "mean_speed": 6.5741176303410995,
+      "median_finish_s": null,
+      "intervention_rate": 0.4545084951456311,
+      "brake_override_rate": 0.0,
+      "p_success_vs_ref": 1.0,
+      "p_unsafe_vs_ref": 1.0,
+      "n_both_success": 0,
+      "p_time_vs_ref": null
+    },
+    "neural_icbf": {
+      "n": 3,
+      "success_pct": 0.0,
+      "success_ci": [
+        5.551115123125783e-15,
+        56.149703563931965
+      ],
+      "unsafe_pct": 100.0,
+      "unsafe_ci": [
+        43.85029643606804,
+        100.0
+      ],
+      "stalled_pct": 0.0,
+      "timeout_pct": 0.0,
+      "mean_speed": 5.9596090842269795,
+      "median_finish_s": null,
+      "intervention_rate": 0.45036539100176154,
+      "brake_override_rate": 0.0,
+      "p_success_vs_ref": 1.0,
+      "p_unsafe_vs_ref": 1.0,
+      "n_both_success": 0,
+      "p_time_vs_ref": null
+    },
+    "agile_nicbf_coupled": {
+      "n": 3,
+      "success_pct": 0.0,
+      "success_ci": [
+        5.551115123125783e-15,
+        56.149703563931965
+      ],
+      "unsafe_pct": 100.0,
+      "unsafe_ci": [
+        43.85029643606804,
+        100.0
+      ],
+      "stalled_pct": 0.0,
+      "timeout_pct": 0.0,
+      "mean_speed": 5.878782027055254,
+      "median_finish_s": null,
+      "intervention_rate": 0.4350777404457718,
+      "brake_override_rate": 0.0,
+      "p_success_vs_ref": 1.0,
+      "p_unsafe_vs_ref": 1.0,
+      "n_both_success": 0,
+      "p_time_vs_ref": null
+    }
+  }
+}

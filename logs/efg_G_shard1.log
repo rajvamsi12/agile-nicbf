@@ -1,0 +1,34 @@
+
+================================================================================
+PART G: ABLATION 1 (WALL ROWS DISABLED) & K=1000 FOR NEURAL METHODS
+================================================================================
+
+--- G.1: neural_icbf (wall rows disabled, K=50) ---
+[Stage 4] Loaded Neural Barrier Network from /home/raj/agile_nicbf/models/neural_icbf_6d.pth (mode=neural_icbf)
+[neural_icbf          seed=138] stalled        8.9s v=3.77 (78.5s)
+[neural_icbf          seed=360] out_of_bounds   3.1s v=5.69 (26.0s)
+[neural_icbf          seed=582] stalled        4.6s v=1.61 (38.0s)
+[neural_icbf          seed=804] success        8.5s v=5.92 (70.4s)
+[neural_icbf          seed=1026] collision      3.1s v=5.53 (26.1s)
+
+--- G.2: neural_icbf (K=1000) ---
+[Stage 4] Loaded Neural Barrier Network from /home/raj/agile_nicbf/models/neural_icbf_6d.pth (mode=neural_icbf)
+[neural_icbf          seed=138] collision      5.7s v=5.97 (62.3s)
+[neural_icbf          seed=360] timeout       40.0s v=5.91 (468.5s)
+[neural_icbf          seed=582] collision      5.5s v=5.91 (53.8s)
+[neural_icbf          seed=804] collision      3.9s v=5.80 (43.1s)
+[neural_icbf          seed=1026] timeout       40.0s v=5.86 (415.0s)
+
+--- G.3: agile_nicbf_coupled (wall rows disabled, K=50) ---
+[agile_nicbf_coupled  seed=138] out_of_bounds   7.5s v=5.11 (69.0s)
+[agile_nicbf_coupled  seed=360] out_of_bounds   3.2s v=5.61 (33.7s)
+[agile_nicbf_coupled  seed=582] success        8.4s v=6.00 (106.4s)
+[agile_nicbf_coupled  seed=804] out_of_bounds   4.8s v=5.65 (62.6s)
+[agile_nicbf_coupled  seed=1026] out_of_bounds   6.9s v=3.57 (86.8s)
+
+--- G.4: agile_nicbf_coupled (K=1000) ---
+[agile_nicbf_coupled  seed=138] collision      5.7s v=5.96 (83.9s)
+[agile_nicbf_coupled  seed=360] timeout       40.0s v=5.86 (472.0s)
+[agile_nicbf_coupled  seed=582] timeout       40.0s v=5.77 (321.9s)
+[agile_nicbf_coupled  seed=804] timeout       40.0s v=5.67 (312.9s)
+[agile_nicbf_coupled  seed=1026] collision      5.2s v=4.55 (49.2s)

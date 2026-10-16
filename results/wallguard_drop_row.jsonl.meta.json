@@ -1,0 +1,38 @@
+{
+  "args": {
+    "mu": [
+      1.0
+    ],
+    "speeds": [
+      6.0
+    ],
+    "Ks": [
+      50
+    ],
+    "episodes": 30,
+    "methods": [
+      "analytical_hocbf",
+      "neural_icbf",
+      "agile_nicbf_coupled"
+    ],
+    "max_steps": 2000,
+    "device": "cuda",
+    "out": "results/wallguard_drop_row.jsonl",
+    "shard": "5/6",
+    "r_margin": 0.38,
+    "no_brake_clamp": false,
+    "wall_steer_guard": "drop_row",
+    "analyze": null,
+    "ref": "mppi_alone"
+  },
+  "source_md5": {
+    "dynamic_bicycle_env.py": "48f78808a0b8cd97f721484327b5e488",
+    "mppi_planner.py": "81f381bcd1896fbb6b3e5d4764099980",
+    "safe_controller.py": "ffd92eac72ba7d101fa098ef92b9a201",
+    "train_neural_icbf.py": "2ffad07731d18c0ec4dabb61aa01c974",
+    "stress_grid.py": "7fb9f4b5a75e763e15af0a141e5c7f89"
+  },
+  "git_commit": "unknown",
+  "model_md5": "975184437bedd81643a817f0cd1bb3a0",
+  "time": "2026-10-15 22:22:13"
+}

@@ -1,0 +1,25 @@
+{
+  "(1.0, 6.0, 50)": {
+    "neural_icbf": {
+      "n": 30,
+      "success_pct": 26.666666666666668,
+      "success_ci": [
+        14.182663247581011,
+        44.44796184128676
+      ],
+      "unsafe_pct": 53.333333333333336,
+      "unsafe_ci": [
+        36.142299496959765,
+        69.76761120463057
+      ],
+      "stalled_pct": 20.0,
+      "timeout_pct": 0.0,
+      "mean_speed": 4.961191712850631,
+      "median_finish_s": 8.55,
+      "intervention_rate": 0.08705465466315122,
+      "brake_override_rate": 0.0,
+      "mean_n_surv": 45.00467393290568,
+      "frac_steps_n_surv_lt5": 0.0503252002786074
+    }
+  }
+}

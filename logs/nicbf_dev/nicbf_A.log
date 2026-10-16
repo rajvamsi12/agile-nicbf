@@ -1,0 +1,9 @@
+  seed   101: success       t=13.10s v=3.88 slack=0.03 minh_obs=-0.06 minh_wall=+0.98 grip_viol=0.00 lat=8.7ms
+  seed   138: success       t=11.84s v=4.23 slack=0.00 minh_obs=+0.10 minh_wall=+1.00 grip_viol=0.00 lat=7.8ms
+  seed   175: collision     t= 5.32s v=3.29 slack=0.03 minh_obs=-0.04 minh_wall=+0.99 grip_viol=0.00 lat=8.3ms
+  seed   212: success       t=12.04s v=4.17 slack=0.01 minh_obs=+0.03 minh_wall=+1.00 grip_viol=0.00 lat=8.4ms
+  seed   249: success       t=12.12s v=4.14 slack=0.01 minh_obs=+0.04 minh_wall=+1.00 grip_viol=0.00 lat=9.2ms
+  seed   286: success       t=12.10s v=4.15 slack=0.00 minh_obs=-0.01 minh_wall=+1.00 grip_viol=0.00 lat=9.1ms
+  seed   323: stalled       t=13.74s v=3.19 slack=0.16 minh_obs=-0.11 minh_wall=+1.00 grip_viol=0.00 lat=9.6ms
+  seed   360: success       t=12.16s v=4.13 slack=0.01 minh_obs=+0.02 minh_wall=+1.00 grip_viol=0.00 lat=9.0ms
+nicbf v=4.0 {'alpha': 5, 'gamma': 10}: success=6 collision=1 stalled=1

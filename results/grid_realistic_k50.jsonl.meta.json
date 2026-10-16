@@ -1,0 +1,36 @@
+{
+  "args": {
+    "mu": [
+      1.0
+    ],
+    "speeds": [
+      6.0
+    ],
+    "Ks": [
+      50
+    ],
+    "episodes": 5,
+    "methods": [
+      "mppi_alone",
+      "analytical_hocbf",
+      "neural_icbf",
+      "agile_nicbf_coupled"
+    ],
+    "max_steps": 2000,
+    "device": "cuda",
+    "out": "/home/raj/agile_nicbf/results/grid_realistic_k50.jsonl",
+    "shard": "0/1",
+    "no_brake_clamp": false,
+    "analyze": null,
+    "ref": "mppi_alone"
+  },
+  "source_md5": {
+    "dynamic_bicycle_env.py": "6b40ef48aad46823cde854c6a38434f9",
+    "mppi_planner.py": "9579771760b3c1502050f2cdea752543",
+    "safe_controller.py": "826c455eae496570410bd7fbadf30363",
+    "train_neural_icbf.py": "2ffad07731d18c0ec4dabb61aa01c974"
+  },
+  "git_commit": "unknown",
+  "model_md5": "975184437bedd81643a817f0cd1bb3a0",
+  "time": "2026-10-15 03:16:15"
+}

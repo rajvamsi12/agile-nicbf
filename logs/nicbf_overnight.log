@@ -1,0 +1,94 @@
+===== STAGE 1: F_theta Neural ODE  Fri Oct 16 02:26:28 AM IST 2026
+data: 400000 pairs + 40000 x 10-step trajectories in 0s
+epoch   1 train 1.56875 val_deriv_nmse 0.25153
+epoch  10 train 0.07057 val_deriv_nmse 0.01597
+===== STAGE 2a: MPPI expert data collection  Fri Oct 16 02:27:13 AM IST 2026
+epoch  20 train 0.05831 val_deriv_nmse 0.00772
+epoch  30 train 0.02509 val_deriv_nmse 0.00491
+epoch  40 train 0.01975 val_deriv_nmse 0.00378
+epoch  50 train 0.01120 val_deriv_nmse 0.00339
+epoch  60 train 0.01478 val_deriv_nmse 0.00327
+{
+ "val_deriv_nmse_per_output": [
+  0.0011404105462133884,
+  0.0006469942745752633,
+  0.0004744459583889693,
+  0.0011907718144357204,
+  0.0019101115176454186,
+  0.014266191981732845
+ ],
+ "rollout_1s_pos_err_m": {
+  "median": 0.08454255759716034,
+  "p95": 0.1413307636976242
+ },
+ "rollout_1s_yaw_err_rad": {
+  "median": 0.02238905429840088,
+  "p95": 0.04782864451408386
+ },
+ "dFdu_rel_err": {
+  "median": 0.08449408411979675,
+  "p95": 0.2040778547525406
+ },
+ "dFdu_cosine": {
+  "median": 0.9999799728393555,
+  "p5": 0.9991294145584106
+ },
+ "train_time_s": 366.62066411972046
+}
+saved /home/raj/agile_nicbf/prototype_neural_ode/dynamic/models/F_theta.pth
+===== STAGE 3: barrier networks (labels through F_theta)  Fri Oct 16 02:32:46 AM IST 2026
+===== STAGE 5a: baselines (mppi_alone, analytical_hocbf) v=3.5,4.0  Fri Oct 16 02:32:53 AM IST 2026
+[wall] labelled 120000 states through F_theta in 915s | safe 84.9%
+[wall] epoch  1 val_mse 0.0181 acc 96.03% false_safe@0 18.78% @0.2 7.23%
+[wall] epoch 10 val_mse 0.0020 acc 98.74% false_safe@0 5.80% @0.2 0.11%
+[wall] epoch 20 val_mse 0.0010 acc 98.93% false_safe@0 5.95% @0.2 0.00%
+[wall] epoch 30 val_mse 0.0006 acc 99.26% false_safe@0 1.73% @0.2 0.00%
+[wall] epoch 40 val_mse 0.0007 acc 99.17% false_safe@0 3.76% @0.2 0.00%
+[wall] epoch 50 val_mse 0.0005 acc 99.37% false_safe@0 2.30% @0.2 0.00%
+[wall] epoch 60 val_mse 0.0005 acc 99.41% false_safe@0 1.58% @0.2 0.00%
+[wall] best: {"epoch": 58, "val_mse": 0.0004798727750312537, "sign_acc": 0.9943888783454895, "false_safe@0": 0.018065487391795258, "false_safe@0.1": 0.0003763643206624012, "false_safe@0.2": 0.0, "safe_frac": 0.8489500284194946, "n": 120000, "total_time_s": 948.6174039840698}
+[obs] labelled 200000 states through F_theta in 1374s | safe 91.3%
+[obs] epoch  1 val_mse 0.0759 acc 93.46% false_safe@0 4.72% @0.2 2.11%
+[obs] epoch 10 val_mse 0.0037 acc 98.98% false_safe@0 3.10% @0.2 0.42%
+[obs] epoch 20 val_mse 0.0013 acc 99.46% false_safe@0 4.15% @0.2 0.15%
+[obs] epoch 30 val_mse 0.0010 acc 99.48% false_safe@0 4.42% @0.2 0.00%
+[obs] epoch 40 val_mse 0.0007 acc 99.56% false_safe@0 1.55% @0.2 0.00%
+[obs] epoch 50 val_mse 0.0005 acc 99.67% false_safe@0 1.85% @0.2 0.00%
+[obs] epoch 60 val_mse 0.0005 acc 99.69% false_safe@0 1.36% @0.2 0.00%
+[obs] best: {"epoch": 59, "val_mse": 0.000507538381498307, "sign_acc": 0.996666669845581, "false_safe@0": 0.01698754246885617, "false_safe@0.1": 0.0007550018875047187, "false_safe@0.2": 0.0, "safe_frac": 0.9132949709892273, "n": 200000, "total_time_s": 1412.5134189128876}
+shard 0: 13500 samples in 2182s
+shard 1: 13500 samples in 2182s
+shard 3: 13500 samples in 2182s
+shard 2: 13500 samples in 2182s
+===== STAGE 2b: train pi_theta  Fri Oct 16 03:05:45 AM IST 2026
+epoch   1 train 0.0265 val_nmse ax 0.0069 delta 0.0435
+epoch  25 train 0.0214 val_nmse ax 0.0027 delta 0.0376
+epoch  50 train 0.0189 val_nmse ax 0.0024 delta 0.0373
+epoch  75 train 0.0191 val_nmse ax 0.0021 delta 0.0367
+epoch 100 train 0.0194 val_nmse ax 0.0021 delta 0.0366
+epoch 125 train 0.0173 val_nmse ax 0.0020 delta 0.0365
+epoch 150 train 0.0195 val_nmse ax 0.0020 delta 0.0365
+{"n_samples": 54000, "val_mae_ax": 0.23475974798202515, "val_mae_delta": 0.06191597878932953, "train_time_s": 20.039563179016113}
+saved /home/raj/agile_nicbf/prototype_neural_ode/dynamic/models/pi_theta.pth
+baselines done
+===== STAGE 5b: final NICBF evaluation  Fri Oct 16 03:25:05 AM IST 2026  config {"alpha": 5, "gamma": 10, "a_rate_scale": 30, "h_offset": 0.2}
+final evaluation done Fri Oct 16 03:35:17 AM IST 2026
+===== SUMMARY Fri Oct 16 10:13:44 AM IST 2026
+   v method                                   n          success collision   OOB           UNSAFE  stall   tmo  speed  lat ms
+ 3.5 MPPI alone                              30  86.7 [70.3,94.7]       0.0   0.0   0.0 [ 0.0,11.4]   13.3   0.0   3.52     0.0
+ 3.5 Analytical HOCBF (MPPI nominal)         30  60.0 [42.3,75.4]      20.0   0.0  20.0 [ 9.5,37.3]   10.0  10.0   3.48     0.0
+ 3.5 Neural ICBF, pi_theta nominal (paper)   30  73.3 [55.6,85.8]       3.3   0.0   3.3 [ 0.6,16.7]   23.3   0.0   3.42     7.8
+ 3.5 Neural ICBF, MPPI nominal               30  86.7 [70.3,94.7]       0.0   0.0   0.0 [ 0.0,11.4]   13.3   0.0   3.60     7.2
+
+ 4.0 MPPI alone                              30  86.7 [70.3,94.7]       3.3   3.3   6.7 [ 1.8,21.3]    6.7   0.0   4.06     0.0
+ 4.0 Analytical HOCBF (MPPI nominal)         30  33.3 [19.2,51.2]      33.3   0.0  33.3 [19.2,51.2]   26.7   6.7   3.51     0.0
+ 4.0 Neural ICBF, pi_theta nominal (paper)   30  80.0 [62.7,90.5]       3.3   0.0   3.3 [ 0.6,16.7]   16.7   0.0   3.91     7.9
+ 4.0 Neural ICBF, MPPI nominal               30  83.3 [66.4,92.7]       0.0   0.0   0.0 [ 0.0,11.4]   16.7   0.0   3.99     7.3
+
+v=3.5 nicbf vs mppi_alone (same seeds): {'collision | mppi success': 1, 'stalled | mppi stalled': 1, 'stalled | mppi success': 6, 'success | mppi stalled': 3, 'success | mppi success': 19}
+v=3.5 nicbf_mppi vs mppi_alone (same seeds): {'stalled | mppi stalled': 3, 'stalled | mppi success': 1, 'success | mppi stalled': 1, 'success | mppi success': 25}
+v=4.0 nicbf vs mppi_alone (same seeds): {'collision | mppi success': 1, 'stalled | mppi success': 5, 'success | mppi collision': 1, 'success | mppi out_of_bounds': 1, 'success | mppi stalled': 2, 'success | mppi success': 20}
+v=4.0 nicbf_mppi vs mppi_alone (same seeds): {'stalled | mppi out_of_bounds': 1, 'stalled | mppi stalled': 2, 'stalled | mppi success': 2, 'success | mppi collision': 1, 'success | mppi success': 24}
+
+wrote results/nicbf_overnight_summary.json
+report: results/nicbf_overnight_REPORT.md

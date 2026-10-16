@@ -1,0 +1,45 @@
+1 cells x 10 seeds x 1 methods = 10 episodes (0 already done) | device cuda
+[Stage 4] Loaded Neural Barrier Network from /home/raj/agile_nicbf/models/neural_icbf_6d.pth (mode=analytical_hocbf)
+[1] mu=1.0 v=6.0 K=50 seed=175 analytical_hocbf     out_of_bounds   4.8s v=4.14 (33.6s wall)
+[2] mu=1.0 v=6.0 K=50 seed=286 analytical_hocbf     out_of_bounds  11.5s v=2.54 (73.9s wall)
+[3] mu=1.0 v=6.0 K=50 seed=397 analytical_hocbf     collision       2.8s v=5.65 (20.9s wall)
+[4] mu=1.0 v=6.0 K=50 seed=508 analytical_hocbf     success        10.2s v=4.96 (69.9s wall)
+[5] mu=1.0 v=6.0 K=50 seed=619 analytical_hocbf     stalled         5.3s v=1.39 (34.0s wall)
+[6] mu=1.0 v=6.0 K=50 seed=730 analytical_hocbf     success         8.5s v=5.90 (61.4s wall)
+[7] mu=1.0 v=6.0 K=50 seed=841 analytical_hocbf     stalled         6.6s v=1.68 (44.2s wall)
+[8] mu=1.0 v=6.0 K=50 seed=952 analytical_hocbf     stalled        10.4s v=3.28 (65.5s wall)
+[9] mu=1.0 v=6.0 K=50 seed=1063 analytical_hocbf     stalled         8.1s v=2.05 (58.1s wall)
+[10] mu=1.0 v=6.0 K=50 seed=1174 analytical_hocbf     collision       6.6s v=2.14 (46.7s wall)
+
+=== mu=1.00  v_target=6.0 m/s  K=50 ===
+analytical_hocbf       n=28  succ   7.1 [ 2.0, 22.6] | unsafe  35.7 [20.7, 54.2] | stall 57.1 tmo  0.0 | v 3.20 T 9.3 | intv 0.37 brk 0.00 | n_surv 48.5 lt5  1.5%
+
+================================================================================
+SHIELD FORENSICS: analytical_hocbf (cell mu=1.00, v=6.0, K=50, n=28)
+================================================================================
+  Metric                                                                Value
+  ----------------------------------------------------------------------------
+  QP status: ok fraction                                                37.2%
+  QP status: skipped_all_satisfied fraction                             62.8%
+  QP status: infeasible fraction                                         0.0%
+  QP status: exception:* fraction                                        0.0%
+  Wall fallback active fraction                                          0.0%
+  Mean obstacle constraint rows (n_obstacle_rows)                        0.08
+  Mean unreachable obstacles (n_unreachable)                             0.04
+  Mean (u_safe - u_nom) ax [m/s^2]                                     -1.131
+  Mean (u_safe - u_nom) delta [rad]                                    -0.001
+  Fraction of interventions with ax reduced (braking)                   85.2%
+  Mean minimum wall margin (wall_margin_min)                           +2.276
+  Mean minimum obstacle h(x) (min_h_val)                               +1.303
+  Wall top violation fraction (top_margin < 0)                          17.2%
+  Wall bot violation fraction (bot_margin < 0)                          16.2%
+  Obstacle violation fraction (any rhs < 0)                              5.2%
+  Brake needed fraction                                                  0.0%
+  QP-active steps: ONLY wall rows violated fraction                     86.4%
+  QP-active steps: steering reversal & |diff|>0.3                       25.1%
+  Mean min_h_val over steps with vx < 1.0 m/s                          +0.943
+  Mean dist to nearest obs at first step vx < 1.0                       1.45 m
+================================================================================
+
+
+Summary written to results/wallguard_zero_steer_summary.json

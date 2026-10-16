@@ -1,0 +1,235 @@
+
+================================================================================
+PART F: ABLATIONS ON analytical_hocbf (K=50, mu=1.0, v=6.0, n=30)
+================================================================================
+
+--- Ablation F.1: Wall rows disabled (K=50) ---
+
+=== mu=1.00  v_target=6.0 m/s  K=50 ===
+analytical_hocbf       n=30  succ  23.3 [11.8, 40.9] | unsafe  66.7 [48.8, 80.8] | stall 10.0 tmo  0.0 | v 5.26 T 8.7 | intv 0.08 brk 0.00 | n_surv 44.7 lt5  6.6%
+
+================================================================================
+SHIELD FORENSICS: analytical_hocbf (cell mu=1.00, v=6.0, K=50, n=30)
+================================================================================
+  Metric                                                                Value
+  ----------------------------------------------------------------------------
+  QP status: ok fraction                                                 8.5%
+  QP status: skipped_all_satisfied fraction                             91.5%
+  QP status: infeasible fraction                                         0.0%
+  QP status: exception:* fraction                                        0.0%
+  Wall fallback active fraction                                          0.0%
+  Mean obstacle constraint rows (n_obstacle_rows)                        0.13
+  Mean unreachable obstacles (n_unreachable)                             0.07
+  Mean (u_safe - u_nom) ax [m/s^2]                                     -0.335
+  Mean (u_safe - u_nom) delta [rad]                                    -0.007
+  Fraction of interventions with ax reduced (braking)                   96.3%
+  Mean minimum wall margin (wall_margin_min)                           +1.000
+  Mean minimum obstacle h(x) (min_h_val)                               +1.562
+  Wall top violation fraction (top_margin < 0)                           0.0%
+  Wall bot violation fraction (bot_margin < 0)                           0.0%
+  Obstacle violation fraction (any rhs < 0)                              8.5%
+  Brake needed fraction                                                  0.0%
+  QP-active steps: ONLY wall rows violated fraction                      0.0%
+  QP-active steps: steering reversal & |diff|>0.3                       39.1%
+  Mean min_h_val over steps with vx < 1.0 m/s                          +0.933
+  Mean dist to nearest obs at first step vx < 1.0                       1.07 m
+================================================================================
+
+
+--- Ablation F.2: alpha_w = 2.5 (K=50) ---
+
+=== mu=1.00  v_target=6.0 m/s  K=50 ===
+analytical_hocbf       n=30  succ   0.0 [ 0.0, 11.4] | unsafe  23.3 [11.8, 40.9] | stall 66.7 tmo 10.0 | v 3.36 T  --  | intv 0.36 brk 0.00 | n_surv 48.7 lt5  1.6%
+
+================================================================================
+SHIELD FORENSICS: analytical_hocbf (cell mu=1.00, v=6.0, K=50, n=30)
+================================================================================
+  Metric                                                                Value
+  ----------------------------------------------------------------------------
+  QP status: ok fraction                                                35.9%
+  QP status: skipped_all_satisfied fraction                             64.1%
+  QP status: infeasible fraction                                         0.0%
+  QP status: exception:* fraction                                        0.0%
+  Wall fallback active fraction                                          0.0%
+  Mean obstacle constraint rows (n_obstacle_rows)                        0.08
+  Mean unreachable obstacles (n_unreachable)                             0.04
+  Mean (u_safe - u_nom) ax [m/s^2]                                     -0.892
+  Mean (u_safe - u_nom) delta [rad]                                    +0.013
+  Fraction of interventions with ax reduced (braking)                   76.9%
+  Mean minimum wall margin (wall_margin_min)                           +2.243
+  Mean minimum obstacle h(x) (min_h_val)                               +1.215
+  Wall top violation fraction (top_margin < 0)                          20.6%
+  Wall bot violation fraction (bot_margin < 0)                          12.6%
+  Obstacle violation fraction (any rhs < 0)                              5.0%
+  Brake needed fraction                                                  0.0%
+  QP-active steps: ONLY wall rows violated fraction                     87.1%
+  QP-active steps: steering reversal & |diff|>0.3                       39.4%
+  Mean min_h_val over steps with vx < 1.0 m/s                          +0.933
+  Mean dist to nearest obs at first step vx < 1.0                       2.48 m
+================================================================================
+
+
+--- Ablation F.2: alpha_w = 5.0 (K=50) ---
+
+=== mu=1.00  v_target=6.0 m/s  K=50 ===
+analytical_hocbf       n=30  succ  20.0 [ 9.5, 37.3] | unsafe  70.0 [52.1, 83.3] | stall 10.0 tmo  0.0 | v 5.20 T 8.6 | intv 0.16 brk 0.00 | n_surv 45.1 lt5  6.1%
+
+================================================================================
+SHIELD FORENSICS: analytical_hocbf (cell mu=1.00, v=6.0, K=50, n=30)
+================================================================================
+  Metric                                                                Value
+  ----------------------------------------------------------------------------
+  QP status: ok fraction                                                15.7%
+  QP status: skipped_all_satisfied fraction                             84.3%
+  QP status: infeasible fraction                                         0.0%
+  QP status: exception:* fraction                                        0.0%
+  Wall fallback active fraction                                          0.0%
+  Mean obstacle constraint rows (n_obstacle_rows)                        0.11
+  Mean unreachable obstacles (n_unreachable)                             0.07
+  Mean (u_safe - u_nom) ax [m/s^2]                                     -0.374
+  Mean (u_safe - u_nom) delta [rad]                                    -0.010
+  Fraction of interventions with ax reduced (braking)                   83.1%
+  Mean minimum wall margin (wall_margin_min)                          +25.007
+  Mean minimum obstacle h(x) (min_h_val)                               +1.532
+  Wall top violation fraction (top_margin < 0)                           4.0%
+  Wall bot violation fraction (bot_margin < 0)                           4.5%
+  Obstacle violation fraction (any rhs < 0)                              7.5%
+  Brake needed fraction                                                  0.0%
+  QP-active steps: ONLY wall rows violated fraction                     41.2%
+  QP-active steps: steering reversal & |diff|>0.3                       44.2%
+  Mean min_h_val over steps with vx < 1.0 m/s                          +1.000
+  Mean dist to nearest obs at first step vx < 1.0                       1.88 m
+================================================================================
+
+
+--- Ablation F.2: alpha_w = 8.0 (K=50) ---
+
+=== mu=1.00  v_target=6.0 m/s  K=50 ===
+analytical_hocbf       n=30  succ  16.7 [ 7.3, 33.6] | unsafe  76.7 [59.1, 88.2] | stall  6.7 tmo  0.0 | v 5.31 T 8.7 | intv 0.12 brk 0.00 | n_surv 44.3 lt5  7.2%
+
+================================================================================
+SHIELD FORENSICS: analytical_hocbf (cell mu=1.00, v=6.0, K=50, n=30)
+================================================================================
+  Metric                                                                Value
+  ----------------------------------------------------------------------------
+  QP status: ok fraction                                                12.1%
+  QP status: skipped_all_satisfied fraction                             87.9%
+  QP status: infeasible fraction                                         0.0%
+  QP status: exception:* fraction                                        0.0%
+  Wall fallback active fraction                                          0.0%
+  Mean obstacle constraint rows (n_obstacle_rows)                        0.14
+  Mean unreachable obstacles (n_unreachable)                             0.07
+  Mean (u_safe - u_nom) ax [m/s^2]                                     -0.283
+  Mean (u_safe - u_nom) delta [rad]                                    -0.005
+  Fraction of interventions with ax reduced (braking)                   87.5%
+  Mean minimum wall margin (wall_margin_min)                          +69.365
+  Mean minimum obstacle h(x) (min_h_val)                               +1.621
+  Wall top violation fraction (top_margin < 0)                           1.9%
+  Wall bot violation fraction (bot_margin < 0)                           1.5%
+  Obstacle violation fraction (any rhs < 0)                              8.8%
+  Brake needed fraction                                                  0.0%
+  QP-active steps: ONLY wall rows violated fraction                     20.2%
+  QP-active steps: steering reversal & |diff|>0.3                       39.8%
+  Mean min_h_val over steps with vx < 1.0 m/s                          +0.801
+  Mean dist to nearest obs at first step vx < 1.0                       1.72 m
+================================================================================
+
+
+--- Ablation F.3: K = 50 (planner + shield) ---
+
+=== mu=1.00  v_target=6.0 m/s  K=50 ===
+analytical_hocbf       n=30  succ   0.0 [ 0.0, 11.4] | unsafe  23.3 [11.8, 40.9] | stall 66.7 tmo 10.0 | v 3.36 T  --  | intv 0.36 brk 0.00 | n_surv 48.7 lt5  1.6%
+
+================================================================================
+SHIELD FORENSICS: analytical_hocbf (cell mu=1.00, v=6.0, K=50, n=30)
+================================================================================
+  Metric                                                                Value
+  ----------------------------------------------------------------------------
+  QP status: ok fraction                                                35.9%
+  QP status: skipped_all_satisfied fraction                             64.1%
+  QP status: infeasible fraction                                         0.0%
+  QP status: exception:* fraction                                        0.0%
+  Wall fallback active fraction                                          0.0%
+  Mean obstacle constraint rows (n_obstacle_rows)                        0.08
+  Mean unreachable obstacles (n_unreachable)                             0.04
+  Mean (u_safe - u_nom) ax [m/s^2]                                     -0.892
+  Mean (u_safe - u_nom) delta [rad]                                    +0.013
+  Fraction of interventions with ax reduced (braking)                   76.9%
+  Mean minimum wall margin (wall_margin_min)                           +2.243
+  Mean minimum obstacle h(x) (min_h_val)                               +1.215
+  Wall top violation fraction (top_margin < 0)                          20.6%
+  Wall bot violation fraction (bot_margin < 0)                          12.6%
+  Obstacle violation fraction (any rhs < 0)                              5.0%
+  Brake needed fraction                                                  0.0%
+  QP-active steps: ONLY wall rows violated fraction                     87.1%
+  QP-active steps: steering reversal & |diff|>0.3                       39.4%
+  Mean min_h_val over steps with vx < 1.0 m/s                          +0.933
+  Mean dist to nearest obs at first step vx < 1.0                       2.48 m
+================================================================================
+
+
+--- Ablation F.3: K = 200 (planner + shield) ---
+
+=== mu=1.00  v_target=6.0 m/s  K=200 ===
+analytical_hocbf       n=30  succ   6.7 [ 1.8, 21.3] | unsafe  43.3 [27.4, 60.8] | stall 30.0 tmo 20.0 | v 4.49 T 8.2 | intv 0.32 brk 0.00 | n_surv 190.4 lt5  2.9%
+
+================================================================================
+SHIELD FORENSICS: analytical_hocbf (cell mu=1.00, v=6.0, K=200, n=30)
+================================================================================
+  Metric                                                                Value
+  ----------------------------------------------------------------------------
+  QP status: ok fraction                                                32.1%
+  QP status: skipped_all_satisfied fraction                             67.9%
+  QP status: infeasible fraction                                         0.0%
+  QP status: exception:* fraction                                        0.0%
+  Wall fallback active fraction                                          0.0%
+  Mean obstacle constraint rows (n_obstacle_rows)                        0.12
+  Mean unreachable obstacles (n_unreachable)                             0.06
+  Mean (u_safe - u_nom) ax [m/s^2]                                     -0.605
+  Mean (u_safe - u_nom) delta [rad]                                    +0.019
+  Fraction of interventions with ax reduced (braking)                   64.0%
+  Mean minimum wall margin (wall_margin_min)                           +3.123
+  Mean minimum obstacle h(x) (min_h_val)                               +1.315
+  Wall top violation fraction (top_margin < 0)                          17.1%
+  Wall bot violation fraction (bot_margin < 0)                          10.6%
+  Obstacle violation fraction (any rhs < 0)                              6.9%
+  Brake needed fraction                                                  0.0%
+  QP-active steps: ONLY wall rows violated fraction                     80.9%
+  QP-active steps: steering reversal & |diff|>0.3                       37.5%
+  Mean min_h_val over steps with vx < 1.0 m/s                          +0.842
+  Mean dist to nearest obs at first step vx < 1.0                       1.56 m
+================================================================================
+
+
+--- Ablation F.3: K = 1000 (planner + shield) ---
+
+=== mu=1.00  v_target=6.0 m/s  K=1000 ===
+analytical_hocbf       n=30  succ  43.3 [27.4, 60.8] | unsafe  20.0 [ 9.5, 37.3] | stall  6.7 tmo 30.0 | v 5.59 T 8.3 | intv 0.22 brk 0.00 | n_surv 970.2 lt5  1.2%
+
+================================================================================
+SHIELD FORENSICS: analytical_hocbf (cell mu=1.00, v=6.0, K=1000, n=30)
+================================================================================
+  Metric                                                                Value
+  ----------------------------------------------------------------------------
+  QP status: ok fraction                                                22.1%
+  QP status: skipped_all_satisfied fraction                             77.9%
+  QP status: infeasible fraction                                         0.0%
+  QP status: exception:* fraction                                        0.0%
+  Wall fallback active fraction                                          0.0%
+  Mean obstacle constraint rows (n_obstacle_rows)                        0.13
+  Mean unreachable obstacles (n_unreachable)                             0.06
+  Mean (u_safe - u_nom) ax [m/s^2]                                     -0.446
+  Mean (u_safe - u_nom) delta [rad]                                    +0.010
+  Fraction of interventions with ax reduced (braking)                   61.4%
+  Mean minimum wall margin (wall_margin_min)                           +4.558
+  Mean minimum obstacle h(x) (min_h_val)                               +1.431
+  Wall top violation fraction (top_margin < 0)                           8.3%
+  Wall bot violation fraction (bot_margin < 0)                           9.2%
+  Obstacle violation fraction (any rhs < 0)                              7.0%
+  Brake needed fraction                                                  0.0%
+  QP-active steps: ONLY wall rows violated fraction                     69.1%
+  QP-active steps: steering reversal & |diff|>0.3                       19.9%
+  Mean min_h_val over steps with vx < 1.0 m/s                          +0.778
+  Mean dist to nearest obs at first step vx < 1.0                       1.93 m
+================================================================================
+

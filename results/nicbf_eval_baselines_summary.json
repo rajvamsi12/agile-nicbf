@@ -1,0 +1,98 @@
+{
+  "(1.0, 3.5, 50)": {
+    "mppi_alone": {
+      "n": 30,
+      "success_pct": 86.66666666666667,
+      "success_ci": [
+        70.31867316460598,
+        94.69034455288754
+      ],
+      "unsafe_pct": 0.0,
+      "unsafe_ci": [
+        0.0,
+        11.351339476145206
+      ],
+      "stalled_pct": 13.333333333333334,
+      "timeout_pct": 0.0,
+      "mean_speed": 3.5227662886733015,
+      "median_finish_s": 13.66,
+      "intervention_rate": 0.0,
+      "brake_override_rate": 0.0,
+      "mean_n_surv": 49.825490081353706,
+      "frac_steps_n_surv_lt5": 0.00014285714285714287
+    },
+    "analytical_hocbf": {
+      "n": 30,
+      "success_pct": 60.0,
+      "success_ci": [
+        42.32036012121571,
+        75.40937198355525
+      ],
+      "unsafe_pct": 20.0,
+      "unsafe_ci": [
+        9.505107121882943,
+        37.30569656380418
+      ],
+      "stalled_pct": 10.0,
+      "timeout_pct": 10.0,
+      "mean_speed": 3.4829434113427555,
+      "median_finish_s": 13.620000000000001,
+      "intervention_rate": 0.1621787080037787,
+      "brake_override_rate": 0.0,
+      "mean_n_surv": 49.221159884104246,
+      "frac_steps_n_surv_lt5": 0.006385520516467371,
+      "p_success_vs_ref": 0.0078125,
+      "p_unsafe_vs_ref": 0.03125,
+      "n_both_success": 18,
+      "p_time_vs_ref": 0.2059032107320684
+    }
+  },
+  "(1.0, 4.0, 50)": {
+    "mppi_alone": {
+      "n": 30,
+      "success_pct": 86.66666666666667,
+      "success_ci": [
+        70.31867316460598,
+        94.69034455288754
+      ],
+      "unsafe_pct": 6.666666666666667,
+      "unsafe_ci": [
+        1.8477023624516808,
+        21.323458516874165
+      ],
+      "stalled_pct": 6.666666666666667,
+      "timeout_pct": 0.0,
+      "mean_speed": 4.057576017028917,
+      "median_finish_s": 12.2,
+      "intervention_rate": 0.0,
+      "brake_override_rate": 0.0,
+      "mean_n_surv": 49.29997964099319,
+      "frac_steps_n_surv_lt5": 0.004798850484021905
+    },
+    "analytical_hocbf": {
+      "n": 30,
+      "success_pct": 33.333333333333336,
+      "success_ci": [
+        19.230497996726424,
+        51.21994849532198
+      ],
+      "unsafe_pct": 33.333333333333336,
+      "unsafe_ci": [
+        19.230497996726424,
+        51.21994849532198
+      ],
+      "stalled_pct": 26.666666666666668,
+      "timeout_pct": 6.666666666666667,
+      "mean_speed": 3.5104041611141032,
+      "median_finish_s": 12.030000000000001,
+      "intervention_rate": 0.23262162063338587,
+      "brake_override_rate": 0.0,
+      "mean_n_surv": 47.612835452740555,
+      "frac_steps_n_surv_lt5": 0.023363749898734434,
+      "p_success_vs_ref": 3.0517578125e-05,
+      "p_unsafe_vs_ref": 0.021484375,
+      "n_both_success": 10,
+      "p_time_vs_ref": 0.8203125
+    }
+  }
+}

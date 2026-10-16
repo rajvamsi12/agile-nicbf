@@ -1,0 +1,36 @@
+{
+  "args": {
+    "mu": [
+      0.5
+    ],
+    "speeds": [
+      5.0,
+      6.0,
+      10.0
+    ],
+    "Ks": [
+      50
+    ],
+    "episodes": 10,
+    "methods": [
+      "mppi_alone",
+      "mppi_oracle_mu"
+    ],
+    "max_steps": 2000,
+    "device": "cuda",
+    "out": "results/feas_mu05.jsonl",
+    "shard": "0/1",
+    "no_brake_clamp": false,
+    "analyze": null,
+    "ref": "mppi_alone"
+  },
+  "source_md5": {
+    "dynamic_bicycle_env.py": "48f78808a0b8cd97f721484327b5e488",
+    "mppi_planner.py": "81f381bcd1896fbb6b3e5d4764099980",
+    "safe_controller.py": "6b59577a23e2a172ced8333bee779b82",
+    "train_neural_icbf.py": "2ffad07731d18c0ec4dabb61aa01c974"
+  },
+  "git_commit": "unknown",
+  "model_md5": "975184437bedd81643a817f0cd1bb3a0",
+  "time": "2026-10-15 12:24:53"
+}

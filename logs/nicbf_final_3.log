@@ -1,0 +1,27 @@
+2 cells x 5 seeds x 2 methods = 20 episodes (0 already done) | device cuda
+[1] mu=1.0 v=3.5 K=50 seed=212 nicbf                success        13.4s v=3.74 (5.2s wall)
+[2] mu=1.0 v=3.5 K=50 seed=212 nicbf_mppi           success        13.3s v=3.82 (61.5s wall)
+[3] mu=1.0 v=3.5 K=50 seed=434 nicbf                success        13.9s v=3.64 (5.5s wall)
+[4] mu=1.0 v=3.5 K=50 seed=434 nicbf_mppi           success        14.2s v=3.67 (63.6s wall)
+[5] mu=1.0 v=3.5 K=50 seed=656 nicbf                stalled        11.2s v=2.64 (4.9s wall)
+[6] mu=1.0 v=3.5 K=50 seed=656 nicbf_mppi           success        13.5s v=3.80 (60.4s wall)
+[7] mu=1.0 v=3.5 K=50 seed=878 nicbf                collision      11.1s v=3.88 (4.4s wall)
+[8] mu=1.0 v=3.5 K=50 seed=878 nicbf_mppi           success        13.4s v=3.80 (61.3s wall)
+[9] mu=1.0 v=3.5 K=50 seed=1100 nicbf                success        13.5s v=3.73 (5.6s wall)
+[10] mu=1.0 v=3.5 K=50 seed=1100 nicbf_mppi           success        13.5s v=3.80 (60.7s wall)
+[11] mu=1.0 v=4.0 K=50 seed=212 nicbf                success        12.6s v=4.05 (5.2s wall)
+[12] mu=1.0 v=4.0 K=50 seed=212 nicbf_mppi           success        11.8s v=4.30 (52.3s wall)
+[13] mu=1.0 v=4.0 K=50 seed=434 nicbf                success        12.5s v=4.05 (5.1s wall)
+[14] mu=1.0 v=4.0 K=50 seed=434 nicbf_mppi           success        12.7s v=4.13 (55.5s wall)
+[15] mu=1.0 v=4.0 K=50 seed=656 nicbf                stalled        10.3s v=2.88 (3.9s wall)
+[16] mu=1.0 v=4.0 K=50 seed=656 nicbf_mppi           success        11.8s v=4.30 (51.8s wall)
+[17] mu=1.0 v=4.0 K=50 seed=878 nicbf                collision       9.8s v=4.36 (4.1s wall)
+[18] mu=1.0 v=4.0 K=50 seed=878 nicbf_mppi           success        11.9s v=4.27 (49.4s wall)
+[19] mu=1.0 v=4.0 K=50 seed=1100 nicbf                success        11.9s v=4.22 (4.6s wall)
+[20] mu=1.0 v=4.0 K=50 seed=1100 nicbf_mppi           success        11.9s v=4.29 (37.3s wall)
+
+=== mu=1.00  v_target=3.5 m/s  K=50 ===
+
+=== mu=1.00  v_target=4.0 m/s  K=50 ===
+
+Summary written to results/nicbf_eval_pipeline_summary.json

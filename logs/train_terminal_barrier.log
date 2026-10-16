@@ -1,0 +1,11 @@
+labels: 300000 states in 209s | safe 90.9%
+epoch  1 val_mse 0.1593 sign_acc 88.84% false_safe@0 21.39% @0.1 17.52%
+epoch  5 val_mse 0.0245 sign_acc 96.56% false_safe@0 15.29% @0.1 10.10%
+epoch 10 val_mse 0.0153 sign_acc 97.36% false_safe@0 19.57% @0.1 13.09%
+epoch 15 val_mse 0.0245 sign_acc 96.46% false_safe@0 2.56% @0.1 1.34%
+epoch 20 val_mse 0.0093 sign_acc 98.05% false_safe@0 7.13% @0.1 3.66%
+epoch 25 val_mse 0.0064 sign_acc 98.49% false_safe@0 7.49% @0.1 3.21%
+epoch 30 val_mse 0.0052 sign_acc 98.60% false_safe@0 5.05% @0.1 2.23%
+epoch 35 val_mse 0.0048 sign_acc 98.76% false_safe@0 7.04% @0.1 2.75%
+epoch 40 val_mse 0.0048 sign_acc 98.66% false_safe@0 4.26% @0.1 1.46%
+saved /home/raj/agile_nicbf/models/terminal_barrier_8d.pth {'epoch': 37, 'val_mse': 0.00461031636223197, 'val_sign_acc': 0.9875333309173584, 'false_safe_rate@0': 0.05264417324718832, 'false_safe_rate@0.1': 0.01890404402967217, 'n': 300000, 'steps': 75, 'mu_grid': [1.0, 1.0489], 'train_time_s': 241.37312936782837}

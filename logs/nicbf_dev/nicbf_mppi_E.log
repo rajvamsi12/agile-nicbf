@@ -1,0 +1,9 @@
+  seed   101: success       t=12.12s v=4.24 slack=0.00 minh_obs=+0.60 minh_wall=+0.31 grip_viol=0.00 lat=9.1ms
+  seed   138: success       t=11.88s v=4.25 slack=0.00 minh_obs=+0.37 minh_wall=+0.80 grip_viol=0.00 lat=6.8ms
+  seed   175: success       t=12.78s v=4.09 slack=0.01 minh_obs=+0.19 minh_wall=+0.44 grip_viol=0.00 lat=6.7ms
+  seed   212: success       t=11.82s v=4.30 slack=0.00 minh_obs=+0.75 minh_wall=+0.69 grip_viol=0.00 lat=6.4ms
+  seed   249: success       t=11.82s v=4.30 slack=0.00 minh_obs=+0.73 minh_wall=+0.72 grip_viol=0.00 lat=6.5ms
+  seed   286: success       t=11.88s v=4.27 slack=0.00 minh_obs=+0.43 minh_wall=+0.78 grip_viol=0.00 lat=6.3ms
+  seed   323: success       t=11.78s v=4.31 slack=0.00 minh_obs=+0.72 minh_wall=+0.74 grip_viol=0.00 lat=6.4ms
+  seed   360: stalled       t= 7.68s v=2.45 slack=0.00 minh_obs=+0.51 minh_wall=+0.30 grip_viol=0.00 lat=6.2ms
+nicbf_mppi v=4.0 {'alpha': 3, 'gamma': 10, 'a_rate_scale': 30, 'h_offset': 0.2}: success=7 stalled=1

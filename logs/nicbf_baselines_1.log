@@ -1,0 +1,102 @@
+2 cells x 8 seeds x 2 methods = 32 episodes (0 already done) | device cuda
+[1] mu=1.0 v=3.5 K=50 seed=138 mppi_alone           success        13.5s v=3.76 (161.4s wall)
+[Stage 4] Loaded Neural Barrier Network from /home/raj/agile_nicbf/models/neural_icbf_6d.pth (mode=analytical_hocbf)
+[2] mu=1.0 v=3.5 K=50 seed=138 analytical_hocbf     collision       9.5s v=3.58 (131.3s wall)
+[3] mu=1.0 v=3.5 K=50 seed=286 mppi_alone           success        14.0s v=3.64 (162.1s wall)
+[4] mu=1.0 v=3.5 K=50 seed=286 analytical_hocbf     success        13.8s v=3.66 (203.5s wall)
+[5] mu=1.0 v=3.5 K=50 seed=434 mppi_alone           stalled         6.4s v=1.82 (89.2s wall)
+[6] mu=1.0 v=3.5 K=50 seed=434 analytical_hocbf     stalled         6.5s v=1.79 (114.9s wall)
+[7] mu=1.0 v=3.5 K=50 seed=582 mppi_alone           success        13.7s v=3.74 (140.0s wall)
+[8] mu=1.0 v=3.5 K=50 seed=582 analytical_hocbf     success        13.5s v=3.75 (141.0s wall)
+[9] mu=1.0 v=3.5 K=50 seed=730 mppi_alone           success        13.4s v=3.77 (121.2s wall)
+[10] mu=1.0 v=3.5 K=50 seed=730 analytical_hocbf     success        13.5s v=3.75 (149.2s wall)
+[11] mu=1.0 v=3.5 K=50 seed=878 mppi_alone           success        13.5s v=3.76 (86.4s wall)
+[12] mu=1.0 v=3.5 K=50 seed=878 analytical_hocbf     timeout        40.0s v=3.34 (358.6s wall)
+[13] mu=1.0 v=3.5 K=50 seed=1026 mppi_alone           success        13.8s v=3.71 (46.7s wall)
+[14] mu=1.0 v=3.5 K=50 seed=1026 analytical_hocbf     success        13.5s v=3.78 (48.4s wall)
+[15] mu=1.0 v=3.5 K=50 seed=1174 mppi_alone           success        13.9s v=3.70 (52.1s wall)
+[16] mu=1.0 v=3.5 K=50 seed=1174 analytical_hocbf     success        14.0s v=3.66 (45.1s wall)
+[17] mu=1.0 v=4.0 K=50 seed=138 mppi_alone           collision       8.3s v=4.11 (30.7s wall)
+[18] mu=1.0 v=4.0 K=50 seed=138 analytical_hocbf     collision       8.3s v=4.06 (55.0s wall)
+[19] mu=1.0 v=4.0 K=50 seed=286 mppi_alone           success        12.1s v=4.19 (58.5s wall)
+[20] mu=1.0 v=4.0 K=50 seed=286 analytical_hocbf     success        12.2s v=4.14 (65.3s wall)
+[21] mu=1.0 v=4.0 K=50 seed=434 mppi_alone           success        12.6s v=4.14 (61.1s wall)
+[22] mu=1.0 v=4.0 K=50 seed=434 analytical_hocbf     stalled         6.1s v=1.90 (34.9s wall)
+[23] mu=1.0 v=4.0 K=50 seed=582 mppi_alone           success        12.0s v=4.23 (58.3s wall)
+[24] mu=1.0 v=4.0 K=50 seed=582 analytical_hocbf     success        11.8s v=4.27 (60.0s wall)
+[25] mu=1.0 v=4.0 K=50 seed=730 mppi_alone           success        11.9s v=4.25 (58.6s wall)
+[26] mu=1.0 v=4.0 K=50 seed=730 analytical_hocbf     timeout        40.0s v=3.76 (157.0s wall)
+[27] mu=1.0 v=4.0 K=50 seed=878 mppi_alone           success        12.2s v=4.16 (37.2s wall)
+[28] mu=1.0 v=4.0 K=50 seed=878 analytical_hocbf     success        39.6s v=3.81 (117.0s wall)
+[29] mu=1.0 v=4.0 K=50 seed=1026 mppi_alone           success        12.2s v=4.21 (31.4s wall)
+[30] mu=1.0 v=4.0 K=50 seed=1026 analytical_hocbf     collision      13.5s v=3.58 (33.2s wall)
+[31] mu=1.0 v=4.0 K=50 seed=1174 mppi_alone           success        12.6s v=4.10 (24.2s wall)
+[32] mu=1.0 v=4.0 K=50 seed=1174 analytical_hocbf     stalled         7.9s v=2.05 (19.9s wall)
+
+=== mu=1.00  v_target=3.5 m/s  K=50 ===
+mppi_alone             n=30  succ  86.7 [70.3, 94.7] | unsafe   0.0 [ 0.0, 11.4] | stall 13.3 tmo  0.0 | v 3.52 T 13.7 | intv 0.00 brk 0.00 | n_surv 49.8 lt5  0.0%
+analytical_hocbf       n=30  succ  60.0 [42.3, 75.4] | unsafe  20.0 [ 9.5, 37.3] | stall 10.0 tmo 10.0 | v 3.48 T 13.6 | intv 0.16 brk 0.00 | n_surv 49.2 lt5  0.6%
+                       vs mppi_alone: p_succ=0.008 p_unsafe=0.031 p_time=0.206 (n_both=18)
+
+================================================================================
+SHIELD FORENSICS: analytical_hocbf (cell mu=1.00, v=3.5, K=50, n=30)
+================================================================================
+  Metric                                                                Value
+  ----------------------------------------------------------------------------
+  QP status: ok fraction                                                16.5%
+  QP status: skipped_all_satisfied fraction                             83.5%
+  QP status: infeasible fraction                                         0.0%
+  QP status: exception:* fraction                                        0.0%
+  Wall fallback active fraction                                          0.0%
+  Mean obstacle constraint rows (n_obstacle_rows)                        0.13
+  Mean unreachable obstacles (n_unreachable)                             0.03
+  Mean (u_safe - u_nom) ax [m/s^2]                                     -0.148
+  Mean (u_safe - u_nom) delta [rad]                                    -0.009
+  Fraction of interventions with ax reduced (braking)                   57.4%
+  Mean minimum wall margin (wall_margin_min)                           +5.132
+  Mean minimum obstacle h(x) (min_h_val)                               +1.080
+  Wall top violation fraction (top_margin < 0)                           6.6%
+  Wall bot violation fraction (bot_margin < 0)                           6.5%
+  Obstacle violation fraction (any rhs < 0)                              4.8%
+  Brake needed fraction                                                  0.0%
+  QP-active steps: ONLY wall rows violated fraction                     68.8%
+  QP-active steps: steering reversal & |diff|>0.3                       25.0%
+  Mean min_h_val over steps with vx < 1.0 m/s                          +0.300
+  Mean dist to nearest obs at first step vx < 1.0                       0.50 m
+================================================================================
+
+
+=== mu=1.00  v_target=4.0 m/s  K=50 ===
+mppi_alone             n=30  succ  86.7 [70.3, 94.7] | unsafe   6.7 [ 1.8, 21.3] | stall  6.7 tmo  0.0 | v 4.06 T 12.2 | intv 0.00 brk 0.00 | n_surv 49.3 lt5  0.5%
+analytical_hocbf       n=30  succ  33.3 [19.2, 51.2] | unsafe  33.3 [19.2, 51.2] | stall 26.7 tmo  6.7 | v 3.51 T 12.0 | intv 0.23 brk 0.00 | n_surv 47.6 lt5  2.3%
+                       vs mppi_alone: p_succ=0.000 p_unsafe=0.021 p_time=0.820 (n_both=10)
+
+================================================================================
+SHIELD FORENSICS: analytical_hocbf (cell mu=1.00, v=4.0, K=50, n=30)
+================================================================================
+  Metric                                                                Value
+  ----------------------------------------------------------------------------
+  QP status: ok fraction                                                23.5%
+  QP status: skipped_all_satisfied fraction                             76.5%
+  QP status: infeasible fraction                                         0.0%
+  QP status: exception:* fraction                                        0.0%
+  Wall fallback active fraction                                          0.0%
+  Mean obstacle constraint rows (n_obstacle_rows)                        0.15
+  Mean unreachable obstacles (n_unreachable)                             0.05
+  Mean (u_safe - u_nom) ax [m/s^2]                                     -0.271
+  Mean (u_safe - u_nom) delta [rad]                                    -0.024
+  Fraction of interventions with ax reduced (braking)                   57.4%
+  Mean minimum wall margin (wall_margin_min)                           +4.152
+  Mean minimum obstacle h(x) (min_h_val)                               +1.112
+  Wall top violation fraction (top_margin < 0)                           8.6%
+  Wall bot violation fraction (bot_margin < 0)                          10.8%
+  Obstacle violation fraction (any rhs < 0)                              6.5%
+  Brake needed fraction                                                  0.0%
+  QP-active steps: ONLY wall rows violated fraction                     71.3%
+  QP-active steps: steering reversal & |diff|>0.3                       33.1%
+  Mean min_h_val over steps with vx < 1.0 m/s                          +0.669
+  Mean dist to nearest obs at first step vx < 1.0                       1.72 m
+================================================================================
+
+
+Summary written to results/nicbf_eval_baselines_summary.json

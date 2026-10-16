@@ -1,0 +1,34 @@
+
+================================================================================
+PART G: ABLATION 1 (WALL ROWS DISABLED) & K=1000 FOR NEURAL METHODS
+================================================================================
+
+--- G.1: neural_icbf (wall rows disabled, K=50) ---
+[Stage 4] Loaded Neural Barrier Network from /home/raj/agile_nicbf/models/neural_icbf_6d.pth (mode=neural_icbf)
+[neural_icbf          seed=101] collision      1.4s v=5.45 (12.5s)
+[neural_icbf          seed=323] success        8.5s v=5.91 (71.0s)
+[neural_icbf          seed=545] success        8.5s v=5.89 (70.2s)
+[neural_icbf          seed=767] success        8.6s v=5.87 (71.4s)
+[neural_icbf          seed=989] stalled       10.2s v=3.49 (83.0s)
+
+--- G.2: neural_icbf (K=1000) ---
+[Stage 4] Loaded Neural Barrier Network from /home/raj/agile_nicbf/models/neural_icbf_6d.pth (mode=neural_icbf)
+[neural_icbf          seed=101] collision      5.5s v=4.60 (59.7s)
+[neural_icbf          seed=323] success        8.2s v=6.14 (96.7s)
+[neural_icbf          seed=545] timeout       40.0s v=5.83 (421.9s)
+[neural_icbf          seed=767] timeout       40.0s v=5.71 (454.6s)
+[neural_icbf          seed=989] collision      6.6s v=2.94 (74.7s)
+
+--- G.3: agile_nicbf_coupled (wall rows disabled, K=50) ---
+[agile_nicbf_coupled  seed=101] success        8.8s v=5.79 (79.0s)
+[agile_nicbf_coupled  seed=323] success        8.7s v=5.77 (77.0s)
+[agile_nicbf_coupled  seed=545] success        8.4s v=5.98 (65.4s)
+[agile_nicbf_coupled  seed=767] collision      3.0s v=5.79 (23.2s)
+[agile_nicbf_coupled  seed=989] out_of_bounds   4.9s v=5.58 (39.0s)
+
+--- G.4: agile_nicbf_coupled (K=1000) ---
+[agile_nicbf_coupled  seed=101] timeout       40.0s v=5.69 (459.4s)
+[agile_nicbf_coupled  seed=323] stalled       14.5s v=3.57 (190.0s)
+[agile_nicbf_coupled  seed=545] stalled       10.7s v=3.70 (110.8s)
+[agile_nicbf_coupled  seed=767] timeout       40.0s v=5.84 (307.7s)
+[agile_nicbf_coupled  seed=989] timeout       40.0s v=5.73 (299.0s)

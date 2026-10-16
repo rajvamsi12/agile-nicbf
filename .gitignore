@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+# third-party clone (https://github.com/f1tenth/f1tenth_gym)
+f1tenth_gym/
+# large / regenerable artefacts
+recorded_videos/
+recorded_videos_all_4/
+results/recorded_videos/
+diag/*.pt
+# local backups and scratch logs
+*.bak
+*.before_*
+backup_before_*/
+shard*_on.log
+shard*_off.log
+logs_efg_parallel_FG.out

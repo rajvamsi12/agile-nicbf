@@ -1,0 +1,29 @@
+{
+  "args": {
+    "methods": [
+      "neural_icbf"
+    ],
+    "K": 50,
+    "shield_kwargs": {
+      "disable_wall_cbf": true,
+      "r_margin": 0.38
+    },
+    "mu": [
+      1.0
+    ],
+    "speeds": [
+      6.0
+    ],
+    "episodes": 30
+  },
+  "source_md5": {
+    "dynamic_bicycle_env.py": "48f78808a0b8cd97f721484327b5e488",
+    "mppi_planner.py": "81f381bcd1896fbb6b3e5d4764099980",
+    "safe_controller.py": "9a3f67cdb4df7823c03075b0fd7e615c",
+    "train_neural_icbf.py": "2ffad07731d18c0ec4dabb61aa01c974",
+    "stress_grid.py": "cf138b880949155ee7bb0593da9be5e5"
+  },
+  "git_commit": "unknown",
+  "model_md5": "975184437bedd81643a817f0cd1bb3a0",
+  "time": "2026-10-15 20:36:24"
+}

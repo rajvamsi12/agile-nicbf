@@ -1,0 +1,34 @@
+
+================================================================================
+PART G: ABLATION 1 (WALL ROWS DISABLED) & K=1000 FOR NEURAL METHODS
+================================================================================
+
+--- G.1: neural_icbf (wall rows disabled, K=50) ---
+[Stage 4] Loaded Neural Barrier Network from /home/raj/agile_nicbf/models/neural_icbf_6d.pth (mode=neural_icbf)
+[neural_icbf          seed=212] out_of_bounds   3.2s v=5.26 (27.1s)
+[neural_icbf          seed=434] success        8.8s v=5.81 (76.6s)
+[neural_icbf          seed=656] collision      6.4s v=5.57 (59.5s)
+[neural_icbf          seed=878] collision      4.6s v=5.76 (42.2s)
+[neural_icbf          seed=1100] collision      1.3s v=4.92 (11.1s)
+
+--- G.2: neural_icbf (K=1000) ---
+[Stage 4] Loaded Neural Barrier Network from /home/raj/agile_nicbf/models/neural_icbf_6d.pth (mode=neural_icbf)
+[neural_icbf          seed=212] collision      9.1s v=4.99 (102.1s)
+[neural_icbf          seed=434] timeout       40.0s v=5.92 (426.3s)
+[neural_icbf          seed=656] collision      4.8s v=4.36 (52.2s)
+[neural_icbf          seed=878] collision      5.7s v=4.57 (54.3s)
+[neural_icbf          seed=1100] collision      4.1s v=3.86 (41.0s)
+
+--- G.3: agile_nicbf_coupled (wall rows disabled, K=50) ---
+[agile_nicbf_coupled  seed=212] stalled       13.4s v=3.68 (115.4s)
+[agile_nicbf_coupled  seed=434] stalled        7.9s v=2.99 (66.2s)
+[agile_nicbf_coupled  seed=656] collision      2.4s v=5.07 (20.1s)
+[agile_nicbf_coupled  seed=878] out_of_bounds   8.8s v=5.07 (87.4s)
+[agile_nicbf_coupled  seed=1100] stalled        5.2s v=2.03 (45.8s)
+
+--- G.4: agile_nicbf_coupled (K=1000) ---
+[agile_nicbf_coupled  seed=212] stalled        9.4s v=3.39 (98.1s)
+[agile_nicbf_coupled  seed=434] timeout       40.0s v=5.80 (454.4s)
+[agile_nicbf_coupled  seed=656] collision      7.7s v=3.62 (117.5s)
+[agile_nicbf_coupled  seed=878] collision      6.4s v=4.22 (91.4s)
+[agile_nicbf_coupled  seed=1100] success        8.4s v=5.96 (115.2s)

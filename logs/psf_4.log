@@ -1,0 +1,10 @@
+1 cells x 5 seeds x 1 methods = 5 episodes (0 already done) | device cuda
+[1] mu=1.0 v=6.0 K=50 seed=249 predictive_filter    success         8.3s v=6.09 (122.5s wall)
+[2] mu=1.0 v=6.0 K=50 seed=471 predictive_filter    success         8.3s v=6.08 (123.4s wall)
+[3] mu=1.0 v=6.0 K=50 seed=693 predictive_filter    out_of_bounds   8.4s v=5.13 (126.2s wall)
+[4] mu=1.0 v=6.0 K=50 seed=915 predictive_filter    success         8.6s v=5.89 (119.2s wall)
+[5] mu=1.0 v=6.0 K=50 seed=1137 predictive_filter    collision       1.4s v=5.05 (14.7s wall)
+
+=== mu=1.00  v_target=6.0 m/s  K=50 ===
+
+Summary written to results/predictive_filter_summary.json

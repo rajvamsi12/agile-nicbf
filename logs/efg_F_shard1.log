@@ -1,0 +1,58 @@
+
+================================================================================
+PART F: ABLATIONS ON analytical_hocbf (K=50, mu=1.0, v=6.0, n=30)
+================================================================================
+
+--- Ablation F.1: Wall rows disabled (K=50) ---
+[Stage 4] Loaded Neural Barrier Network from /home/raj/agile_nicbf/models/neural_icbf_6d.pth (mode=analytical_hocbf)
+[analytical_hocbf     seed=138] collision      5.7s v=5.78 (49.8s)
+[analytical_hocbf     seed=360] out_of_bounds   3.2s v=5.65 (28.4s)
+[analytical_hocbf     seed=582] success        8.4s v=5.99 (92.3s)
+[analytical_hocbf     seed=804] stalled        7.9s v=3.40 (70.0s)
+[analytical_hocbf     seed=1026] collision      6.3s v=5.45 (55.3s)
+
+--- Ablation F.2: alpha_w = 2.5 (K=50) ---
+[Stage 4] Loaded Neural Barrier Network from /home/raj/agile_nicbf/models/neural_icbf_6d.pth (mode=analytical_hocbf)
+[analytical_hocbf     seed=138] stalled        5.7s v=1.72 (66.1s)
+[analytical_hocbf     seed=360] timeout       40.0s v=4.73 (433.6s)
+[analytical_hocbf     seed=582] stalled        5.2s v=1.25 (56.3s)
+[analytical_hocbf     seed=804] stalled        6.5s v=2.11 (58.1s)
+[analytical_hocbf     seed=1026] stalled        5.5s v=1.82 (51.4s)
+
+--- Ablation F.2: alpha_w = 5.0 (K=50) ---
+[Stage 4] Loaded Neural Barrier Network from /home/raj/agile_nicbf/models/neural_icbf_6d.pth (mode=analytical_hocbf)
+[analytical_hocbf     seed=138] collision      5.7s v=5.76 (63.6s)
+[analytical_hocbf     seed=360] stalled        7.0s v=2.51 (86.5s)
+[analytical_hocbf     seed=582] out_of_bounds   3.7s v=5.62 (43.0s)
+[analytical_hocbf     seed=804] out_of_bounds   2.8s v=5.46 (28.6s)
+[analytical_hocbf     seed=1026] stalled        7.7s v=2.78 (79.5s)
+
+--- Ablation F.2: alpha_w = 8.0 (K=50) ---
+[Stage 4] Loaded Neural Barrier Network from /home/raj/agile_nicbf/models/neural_icbf_6d.pth (mode=analytical_hocbf)
+[analytical_hocbf     seed=138] collision      5.7s v=5.78 (70.0s)
+[analytical_hocbf     seed=360] out_of_bounds   3.3s v=5.35 (33.5s)
+[analytical_hocbf     seed=582] success        8.5s v=5.96 (90.8s)
+[analytical_hocbf     seed=804] out_of_bounds   5.7s v=5.78 (54.8s)
+[analytical_hocbf     seed=1026] out_of_bounds   3.0s v=5.30 (28.4s)
+
+--- Ablation F.3: K = 50 (planner + shield) ---
+[Stage 4] Loaded Neural Barrier Network from /home/raj/agile_nicbf/models/neural_icbf_6d.pth (mode=analytical_hocbf)
+[analytical_hocbf     seed=138] stalled        5.7s v=1.72 (65.4s)
+[analytical_hocbf     seed=360] timeout       40.0s v=4.73 (409.0s)
+[analytical_hocbf     seed=582] stalled        5.2s v=1.25 (48.9s)
+[analytical_hocbf     seed=804] stalled        6.5s v=2.11 (53.4s)
+[analytical_hocbf     seed=1026] stalled        5.5s v=1.82 (41.7s)
+
+--- Ablation F.3: K = 200 (planner + shield) ---
+[analytical_hocbf     seed=138] collision      5.7s v=5.72 (45.8s)
+[analytical_hocbf     seed=360] timeout       40.0s v=5.67 (324.0s)
+[analytical_hocbf     seed=582] stalled       16.9s v=4.23 (127.6s)
+[analytical_hocbf     seed=804] timeout       40.0s v=5.83 (290.8s)
+[analytical_hocbf     seed=1026] collision      2.1s v=5.29 (14.1s)
+
+--- Ablation F.3: K = 1000 (planner + shield) ---
+[analytical_hocbf     seed=138] collision      5.6s v=5.98 (40.3s)
+[analytical_hocbf     seed=360] timeout       40.0s v=5.92 (233.5s)
+[analytical_hocbf     seed=582] success        8.3s v=6.06 (46.5s)
+[analytical_hocbf     seed=804] stalled       11.4s v=3.80 (62.1s)
+[analytical_hocbf     seed=1026] timeout       40.0s v=5.85 (151.3s)

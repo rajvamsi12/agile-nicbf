@@ -1,0 +1,10 @@
+1 cells x 5 seeds x 1 methods = 5 episodes (0 already done) | device cuda
+[1] mu=1.0 v=6.0 K=1000 seed=212 predictive_filter    success         8.2s v=6.16 (63.3s wall)
+[2] mu=1.0 v=6.0 K=1000 seed=434 predictive_filter    success         9.3s v=5.58 (73.2s wall)
+[3] mu=1.0 v=6.0 K=1000 seed=656 predictive_filter    success         8.2s v=6.16 (64.4s wall)
+[4] mu=1.0 v=6.0 K=1000 seed=878 predictive_filter    success         8.2s v=6.15 (63.8s wall)
+[5] mu=1.0 v=6.0 K=1000 seed=1100 predictive_filter    success         8.2s v=6.14 (60.6s wall)
+
+=== mu=1.00  v_target=6.0 m/s  K=1000 ===
+
+Summary written to results/psf_v4_k1000_summary.json

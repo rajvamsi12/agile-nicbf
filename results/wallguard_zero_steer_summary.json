@@ -1,0 +1,25 @@
+{
+  "(1.0, 6.0, 50)": {
+    "analytical_hocbf": {
+      "n": 30,
+      "success_pct": 6.666666666666667,
+      "success_ci": [
+        1.8477023624516808,
+        21.323458516874165
+      ],
+      "unsafe_pct": 33.333333333333336,
+      "unsafe_ci": [
+        19.230497996726424,
+        51.21994849532198
+      ],
+      "stalled_pct": 60.0,
+      "timeout_pct": 0.0,
+      "mean_speed": 3.1367100858143706,
+      "median_finish_s": 9.35,
+      "intervention_rate": 0.3683587815438206,
+      "brake_override_rate": 0.0,
+      "mean_n_surv": 48.52498162422631,
+      "frac_steps_n_surv_lt5": 0.014086690793053452
+    }
+  }
+}

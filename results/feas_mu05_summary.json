@@ -1,0 +1,146 @@
+{
+  "(0.5, 5.0, 50)": {
+    "mppi_alone": {
+      "n": 10,
+      "success_pct": 0.0,
+      "success_ci": [
+        0.0,
+        27.75328030260577
+      ],
+      "unsafe_pct": 70.0,
+      "unsafe_ci": [
+        39.67781453459709,
+        89.2208733443606
+      ],
+      "stalled_pct": 30.0,
+      "timeout_pct": 0.0,
+      "mean_speed": 3.816134378665301,
+      "median_finish_s": null,
+      "intervention_rate": 0.0,
+      "brake_override_rate": 0.0,
+      "mean_n_surv": 46.85218663184545,
+      "frac_steps_n_surv_lt5": 0.04344541672952993
+    },
+    "mppi_oracle_mu": {
+      "n": 10,
+      "success_pct": 30.0,
+      "success_ci": [
+        10.779126655639399,
+        60.32218546540291
+      ],
+      "unsafe_pct": 40.0,
+      "unsafe_ci": [
+        16.818032852640698,
+        68.73262320788047
+      ],
+      "stalled_pct": 30.0,
+      "timeout_pct": 0.0,
+      "mean_speed": 3.892720397360519,
+      "median_finish_s": 10.82,
+      "intervention_rate": 0.0,
+      "brake_override_rate": 0.0,
+      "mean_n_surv": 48.632040392001805,
+      "frac_steps_n_surv_lt5": 0.01585133997689038,
+      "p_success_vs_ref": 0.25,
+      "p_unsafe_vs_ref": 0.375,
+      "n_both_success": 0,
+      "p_time_vs_ref": null
+    }
+  },
+  "(0.5, 6.0, 50)": {
+    "mppi_alone": {
+      "n": 10,
+      "success_pct": 0.0,
+      "success_ci": [
+        0.0,
+        27.75328030260577
+      ],
+      "unsafe_pct": 90.0,
+      "unsafe_ci": [
+        59.58499704752279,
+        98.2123787103926
+      ],
+      "stalled_pct": 10.0,
+      "timeout_pct": 0.0,
+      "mean_speed": 4.397938360589853,
+      "median_finish_s": null,
+      "intervention_rate": 0.0,
+      "brake_override_rate": 0.0,
+      "mean_n_surv": 46.53729851836582,
+      "frac_steps_n_surv_lt5": 0.03339654522439323
+    },
+    "mppi_oracle_mu": {
+      "n": 10,
+      "success_pct": 10.0,
+      "success_ci": [
+        1.7876212896074022,
+        40.41500295247722
+      ],
+      "unsafe_pct": 70.0,
+      "unsafe_ci": [
+        39.67781453459709,
+        89.2208733443606
+      ],
+      "stalled_pct": 20.0,
+      "timeout_pct": 0.0,
+      "mean_speed": 4.451778794551678,
+      "median_finish_s": 9.98,
+      "intervention_rate": 0.0,
+      "brake_override_rate": 0.0,
+      "mean_n_surv": 46.9722366763556,
+      "frac_steps_n_surv_lt5": 0.04901088517758842,
+      "p_success_vs_ref": 1.0,
+      "p_unsafe_vs_ref": 0.625,
+      "n_both_success": 0,
+      "p_time_vs_ref": null
+    }
+  },
+  "(0.5, 10.0, 50)": {
+    "mppi_alone": {
+      "n": 10,
+      "success_pct": 0.0,
+      "success_ci": [
+        0.0,
+        27.75328030260577
+      ],
+      "unsafe_pct": 90.0,
+      "unsafe_ci": [
+        59.58499704752279,
+        98.2123787103926
+      ],
+      "stalled_pct": 10.0,
+      "timeout_pct": 0.0,
+      "mean_speed": 6.4906798311604685,
+      "median_finish_s": null,
+      "intervention_rate": 0.0,
+      "brake_override_rate": 0.0,
+      "mean_n_surv": 42.001442758204874,
+      "frac_steps_n_surv_lt5": 0.11425972090369829
+    },
+    "mppi_oracle_mu": {
+      "n": 10,
+      "success_pct": 0.0,
+      "success_ci": [
+        0.0,
+        27.75328030260577
+      ],
+      "unsafe_pct": 80.0,
+      "unsafe_ci": [
+        49.016246912213234,
+        94.3317849062233
+      ],
+      "stalled_pct": 20.0,
+      "timeout_pct": 0.0,
+      "mean_speed": 6.401240602863521,
+      "median_finish_s": null,
+      "intervention_rate": 0.0,
+      "brake_override_rate": 0.0,
+      "mean_n_surv": 40.04765553648568,
+      "frac_steps_n_surv_lt5": 0.15853195950935056,
+      "p_success_vs_ref": 1.0,
+      "p_unsafe_vs_ref": 1.0,
+      "n_both_success": 0,
+      "p_time_vs_ref": null
+    }
+  }
+}

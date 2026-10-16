@@ -1,0 +1,39 @@
+{
+  "args": {
+    "mu": [
+      1.0
+    ],
+    "speeds": [
+      6.0
+    ],
+    "Ks": [
+      1000
+    ],
+    "episodes": 30,
+    "methods": [
+      "predictive_filter"
+    ],
+    "max_steps": 2000,
+    "device": "cuda",
+    "out": "results/psf_v2_k1000.jsonl",
+    "shard": "4/6",
+    "r_margin": 0.38,
+    "no_brake_clamp": false,
+    "wall_steer_guard": "off",
+    "obs_steer_guard": false,
+    "slip_brake_limit": null,
+    "psf": "{}",
+    "analyze": null,
+    "ref": "mppi_alone"
+  },
+  "source_md5": {
+    "dynamic_bicycle_env.py": "48f78808a0b8cd97f721484327b5e488",
+    "mppi_planner.py": "bba9b74ecce746995f55da5d03f12163",
+    "safe_controller.py": "be34b1f4774deb860583073e78dbb8c2",
+    "train_neural_icbf.py": "2ffad07731d18c0ec4dabb61aa01c974",
+    "stress_grid.py": "aab51f55d85c36731c35075008fb949c"
+  },
+  "git_commit": "unknown",
+  "model_md5": "975184437bedd81643a817f0cd1bb3a0",
+  "time": "2026-10-15 23:19:40"
+}

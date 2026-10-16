@@ -1,0 +1,25 @@
+{
+  "(1.0, 6.0, 50)": {
+    "mppi_alone": {
+      "n": 2,
+      "success_pct": 100.0,
+      "success_ci": [
+        34.23802239546493,
+        100.0
+      ],
+      "unsafe_pct": 0.0,
+      "unsafe_ci": [
+        0.0,
+        65.76197760453506
+      ],
+      "stalled_pct": 0.0,
+      "timeout_pct": 0.0,
+      "mean_speed": 5.979088768756155,
+      "median_finish_s": 8.43,
+      "intervention_rate": 0.0,
+      "brake_override_rate": 0.0,
+      "mean_n_surv": 49.34786831525962,
+      "frac_steps_n_surv_lt5": 0.0
+    }
+  }
+}
