@@ -66,6 +66,8 @@ These came before the Neural ICBF pipeline. They show why the method is restrict
 2. **The original 6-D barrier network (`models/neural_icbf_6d.pth`) was used outside its training range.** It was trained on |r|, |v_y| ≤ 1, but MPPI exceeds that range on 64% of steps.
 3. **A predictive filter works at 6 m/s.** Code: `predictive_filter.py`, `fast_rollout.py`. It checks MPPI's samples against a brake-to-stop backup maneuver and commits only to verified plans. It reaches 90–93% success with 0 unsafe outcomes at K = 1000. A learned terminal certificate (`train_terminal_barrier.py`) added neither safety nor speed.
 
+Figures and a LaTeX table from the first benchmark version: `results/trajectory_comparison.png`, `results/friction_circle_compliance.png`, `results/benchmark_table.tex`.
+
 All tables below use 30 seeds; values are percentages. Older 3–5-seed smoke grids (`grid_*`, `smoke*`) are kept in `results/` but are too small to report.
 
 ### A. Baseline shields at 6 and 8 m/s (K = 50)
