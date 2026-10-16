@@ -10,18 +10,18 @@ The code is in `prototype_neural_ode/dynamic/`. Earlier experiments at 6 m/s use
 
 ### Main result: 200 held-out seeds
 
-Setup: 200 obstacle layouts never used for tuning or any earlier run (seeds 3801 and up), μ = 1.0, MPPI with K = 50 samples. Values are percentages with 95% Wilson intervals. *Unsafe* means collision or out of bounds. The p-values come from paired exact McNemar tests against MPPI alone on the same seeds.
+Setup: 200 obstacle layouts never used for tuning or any earlier run (seeds 3801 and up), μ = 1.0, MPPI with K = 50 samples. Each cell is an episode count with its percentage of 200; every row sums to 200 (100%). 95% Wilson intervals are in `results/nicbf_heldout200_summary.json`. *Unsafe* = collision + out of bounds. The p-values come from paired exact McNemar tests against MPPI alone on the same seeds.
 
-| v | Method | Success | Unsafe | Stall | Timeout | Unsafe vs. MPPI (p) |
-|---|---|---|---|---|---|---|
-| 3.5 | MPPI alone | 86.0 [80.5, 90.1] | 0.5 [0.1, 2.8] | 13.5 | 0 | – |
-| 3.5 | Analytical HOCBF-QP | 61.0 [54.1, 67.5] | 29.0 [23.2, 35.6] | 7.0 | 3.0 | worse, p < 0.0001 |
-| 3.5 | Neural ICBF, π_θ nominal (paper) | 81.0 [75.0, 85.8] | 1.5 [0.5, 4.3] | 17.5 | 0 | n.s. (p = 0.63) |
-| 3.5 | Neural ICBF, MPPI nominal | 83.0 [77.2, 87.6] | **0.0** [0.0, 1.9] | 17.0 | 0 | n.s. (p = 1.0) |
-| 4.0 | MPPI alone | 84.0 [78.3, 88.4] | 6.0 [3.5, 10.2] | 10.0 | 0 | – |
-| 4.0 | Analytical HOCBF-QP | 27.5 [21.8, 34.1] | 35.0 [28.7, 41.8] | 9.0 | 28.5 | worse, p < 0.0001 |
-| 4.0 | Neural ICBF, π_θ nominal (paper) | 77.5 [71.2, 82.7] | **0.5** [0.1, 2.8] | 22.0 | 0 | **better, p = 0.003** |
-| 4.0 | Neural ICBF, MPPI nominal | 84.5 [78.8, 88.9] | **0.0** [0.0, 1.9] | 15.5 | 0 | **better, p = 0.0005** |
+| v (m/s) | Method | Success | Collision | Out of bounds | **Unsafe** (coll. + OOB) | Stall | Timeout | Total | Unsafe vs. MPPI alone |
+|---|---|---|---|---|---|---|---|---|---|
+| 3.5 | MPPI alone | 172 (86.0%) | 0 (0.0%) | 1 (0.5%) | **1 (0.5%)** | 27 (13.5%) | 0 (0.0%) | 200 (100%) | – |
+| 3.5 | Analytical HOCBF-QP | 122 (61.0%) | 58 (29.0%) | 0 (0.0%) | **58 (29.0%)** | 14 (7.0%) | 6 (3.0%) | 200 (100%) | worse, p < 0.0001 |
+| 3.5 | Neural ICBF, π_θ nominal (paper) | 162 (81.0%) | 3 (1.5%) | 0 (0.0%) | **3 (1.5%)** | 35 (17.5%) | 0 (0.0%) | 200 (100%) | n.s. (p = 0.62) |
+| 3.5 | Neural ICBF, MPPI nominal | 166 (83.0%) | 0 (0.0%) | 0 (0.0%) | **0 (0.0%)** | 34 (17.0%) | 0 (0.0%) | 200 (100%) | n.s. (p = 1) |
+| 4.0 | MPPI alone | 168 (84.0%) | 7 (3.5%) | 5 (2.5%) | **12 (6.0%)** | 20 (10.0%) | 0 (0.0%) | 200 (100%) | – |
+| 4.0 | Analytical HOCBF-QP | 55 (27.5%) | 69 (34.5%) | 1 (0.5%) | **70 (35.0%)** | 18 (9.0%) | 57 (28.5%) | 200 (100%) | worse, p < 0.0001 |
+| 4.0 | Neural ICBF, π_θ nominal (paper) | 155 (77.5%) | 1 (0.5%) | 0 (0.0%) | **1 (0.5%)** | 44 (22.0%) | 0 (0.0%) | 200 (100%) | **better, p = 0.0034** |
+| 4.0 | Neural ICBF, MPPI nominal | 169 (84.5%) | 0 (0.0%) | 0 (0.0%) | **0 (0.0%)** | 31 (15.5%) | 0 (0.0%) | 200 (100%) | **better, p = 0.0005** |
 
 The filter takes 7–8 ms per step on one CPU core, measured in the uncontended 30-seed run. Sources: `results/nicbf_heldout200.jsonl`, `results/nicbf_heldout200_summary.json`. Launcher: `run_nicbf_heldout200.sh`. Summary script: `prototype_neural_ode/dynamic/summarize_heldout.py`.
 
